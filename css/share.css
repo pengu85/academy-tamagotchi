@@ -1,0 +1,3 @@
+/* share.css */
+.share-btn { background: var(--secondary); color: white; }
+.share-btn:hover { background: #00B5B0; }

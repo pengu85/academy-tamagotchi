@@ -1,0 +1,83 @@
+/* ============================================
+   mission.css - 미션 화면 스타일
+   ============================================ */
+
+.mission-screen h2 {
+  margin-bottom: 16px;
+}
+
+.mission-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+
+.mission-card.completed {
+  border-color: var(--success);
+  background: #F0FFF4;
+  opacity: 0.7;
+}
+
+.mission-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.mission-badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: white;
+  font-weight: 600;
+}
+
+.mission-exp-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.mission-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mission-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.mission-card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.code-input {
+  width: 90px;
+  padding: 6px 10px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.code-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.mission-done-label {
+  font-size: 0.85rem;
+  color: var(--success);
+  font-weight: 600;
+}

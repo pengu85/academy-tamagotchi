@@ -1,0 +1,282 @@
+/* ============================================
+   care.css - 돌봄 시스템 + 일일 루틴 + 비밀 상점/랜덤
+   ============================================ */
+
+/* ============================================
+   리액션 애니메이션
+   ============================================ */
+
+/* 이모지 파티클 */
+.reaction-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.reaction-particle {
+  position: absolute;
+  top: 20%;
+  font-size: 1.6rem;
+  opacity: 0;
+  animation: particle-float 1.2s ease-out forwards;
+}
+
+@keyframes particle-float {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  20% { opacity: 1; transform: translateY(-10px) scale(1.2); }
+  80% { opacity: 1; transform: translateY(-60px) scale(1); }
+  100% { opacity: 0; transform: translateY(-90px) scale(0.6); }
+}
+
+/* 말풍선 */
+.reaction-speech {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: 16px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0;
+  animation: speech-pop 2.2s ease forwards;
+  z-index: 20;
+}
+
+.reaction-speech::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: var(--primary);
+}
+
+@keyframes speech-pop {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.8); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.05); }
+  20% { transform: translateX(-50%) translateY(0) scale(1); }
+  80% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.9); }
+}
+
+/* 캐릭터 리액션 애니메이션 */
+.react-bounce {
+  animation: react-bounce 0.8s ease !important;
+}
+
+@keyframes react-bounce {
+  0%, 100% { transform: translateY(0); }
+  15% { transform: translateY(-15px); }
+  30% { transform: translateY(0); }
+  45% { transform: translateY(-10px); }
+  60% { transform: translateY(0); }
+  75% { transform: translateY(-5px); }
+  90% { transform: translateY(0); }
+}
+
+.react-shake {
+  animation: react-shake 0.8s ease !important;
+}
+
+@keyframes react-shake {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-8deg); }
+  20% { transform: rotate(8deg); }
+  30% { transform: rotate(-6deg); }
+  40% { transform: rotate(6deg); }
+  50% { transform: rotate(-4deg); }
+  60% { transform: rotate(4deg); }
+  70% { transform: rotate(-2deg); }
+  80% { transform: rotate(2deg); }
+}
+
+.react-jump {
+  animation: react-jump 1s ease !important;
+}
+
+@keyframes react-jump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  10% { transform: translateY(5px) scale(0.95, 1.05); }
+  20% { transform: translateY(-25px) scale(1.05, 0.95); }
+  35% { transform: translateY(-30px) scale(1); }
+  50% { transform: translateY(0) scale(0.98, 1.02); }
+  60% { transform: translateY(-12px) scale(1.02, 0.98); }
+  75% { transform: translateY(0) scale(0.99, 1.01); }
+  85% { transform: translateY(-5px); }
+}
+
+/* 돌봄 게이지 */
+.care-gauges {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.care-gauge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+
+.care-gauge.low .care-bar { animation: bar-pulse 1s ease-in-out infinite; }
+
+@keyframes bar-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.care-icon { font-size: 1rem; min-width: 22px; }
+.care-bar-wrap { flex: 1; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+.care-bar { height: 100%; border-radius: 5px; transition: width 0.5s; }
+.care-value { min-width: 24px; text-align: right; font-weight: 600; font-size: 0.75rem; }
+
+.care-sick-alert {
+  background: #FFF3CD;
+  color: #856404;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 6px;
+  animation: sick-shake 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes sick-shake {
+  0% { transform: translateX(-2px); }
+  100% { transform: translateX(2px); }
+}
+
+/* 아픈 다마고치 */
+.tama-sick {
+  filter: saturate(0.5);
+  animation: tama-sad-sway 2s ease-in-out infinite !important;
+}
+
+/* 돌봄 버튼 */
+.care-actions {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.care-btn {
+  flex: 1;
+  padding: 8px 4px;
+  border: 2px solid var(--primary-light);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: white;
+  transition: all 0.2s;
+}
+
+.care-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: white;
+}
+
+.care-btn.done {
+  border-color: var(--success);
+  color: var(--success);
+  background: #F0FFF4;
+}
+
+.care-btn:disabled { cursor: default; opacity: 0.7; }
+
+/* 일일 루틴 */
+.daily-routine {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.routine-title { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+
+.routine-items {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.routine-items span.done { font-weight: 600; }
+
+.routine-complete {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 4px;
+  animation: routine-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes routine-glow {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* 오늘의 할인 */
+.daily-deal {
+  width: 100%;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+  border: 2px solid #FDCB6E;
+  border-radius: 10px;
+}
+
+.deal-header { font-size: 0.8rem; font-weight: 700; margin-bottom: 4px; }
+
+.deal-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.deal-name { font-weight: 600; }
+.deal-price { color: var(--danger); }
+.deal-price s { color: var(--text-muted); }
+.deal-owned { font-size: 0.75rem; color: var(--success); }
+.deal-locked { font-size: 0.75rem; color: var(--text-muted); }
+
+/* 룰렛 */
+.roulette-available { width: 100%; text-align: center; margin-bottom: 8px; }
+
+.roulette-btn {
+  background: linear-gradient(135deg, #6C5CE7, #A29BFE) !important;
+  animation: roulette-glow 1.5s ease-in-out infinite alternate;
+  width: 100%;
+}
+
+@keyframes roulette-glow {
+  0% { box-shadow: 0 0 5px rgba(108,92,231,0.4); }
+  100% { box-shadow: 0 0 20px rgba(108,92,231,0.7); }
+}
+
+/* 비밀 진화 모달 */
+.secret-evo-modal { text-align: center; padding: 12px; }
+.secret-evo-character { margin: 12px auto; }
+.secret-evo-character svg { margin: 0 auto; }
+.secret-evo-name { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-top: 8px; }
+.secret-evo-desc { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+
+/* 도감 힌트 */
+.dex-hints { margin-top: 12px; }
+.dex-hints h4 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
+.dex-hint-text { font-size: 0.8rem; color: var(--primary); font-style: italic; margin-bottom: 4px; }

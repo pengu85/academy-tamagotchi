@@ -1,0 +1,26 @@
+/* team.css */
+.team-empty { text-align: center; padding: 40px 20px; }
+.team-info-bar {
+  display: flex; gap: 12px; align-items: center;
+  padding: 8px 12px; background: var(--bg); border-radius: 8px;
+  font-size: 0.8rem; width: 100%;
+}
+.team-battle-screen { text-align: center; }
+.team-battle-screen h2 { margin-bottom: 4px; }
+.team-ranking-list { margin-top: 16px; }
+.team-rank-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.team-medal { font-size: 1.2rem; min-width: 28px; text-align: center; }
+.team-name-badge { font-weight: 700; font-size: 0.95rem; min-width: 50px; }
+.team-exp-bar-wrap { flex: 1; height: 12px; background: var(--border); border-radius: 6px; overflow: hidden; }
+.team-exp-bar { height: 100%; border-radius: 6px; transition: width 0.5s; }
+.team-exp-value { font-size: 0.8rem; font-weight: 600; min-width: 70px; text-align: right; }
+/* admin */
+.team-admin-card { padding: 12px; margin-bottom: 10px; border-radius: 8px; background: var(--bg); }
+.team-admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.team-members { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+.team-add-select { padding: 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.8rem; width: 100%; }
+.battle-admin-info { padding: 12px; background: var(--bg); border-radius: var(--radius); }
+.battle-admin-info p { margin-bottom: 6px; font-size: 0.9rem; }

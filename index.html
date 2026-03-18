@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>학원 다마고치</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6C5CE7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐣</text></svg>">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tamagotchi.css">
+  <link rel="stylesheet" href="css/mission.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/contest.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/badge.css">
+  <link rel="stylesheet" href="css/minigame.css">
+  <link rel="stylesheet" href="css/event.css">
+  <link rel="stylesheet" href="css/team.css">
+  <link rel="stylesheet" href="css/ranking.css">
+  <link rel="stylesheet" href="css/share.css">
+  <link rel="stylesheet" href="css/care.css">
+  <link rel="stylesheet" href="css/diary.css">
+  <link rel="stylesheet" href="css/challenge.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/house.css">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/friend.css">
+  <link rel="stylesheet" href="css/attendance.css">
+
+  <!-- Pretendard 폰트 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <style>
+    .loading { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-size: 2rem; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="loading">🐣</div>
+  </div>
+
+  <!-- JS (순서 중요: 의존성 순서대로) -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/tamagotchi.js"></script>
+  <script src="js/tamagotchi-renderer.js"></script>
+  <script src="js/event.js"></script>
+  <script src="js/care.js"></script>
+  <script src="js/secret.js"></script>
+  <script src="js/diary.js"></script>
+  <script src="js/challenge.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/house.js"></script>
+  <script src="js/badge.js"></script>
+  <script src="js/minigame.js"></script>
+  <script src="js/mission.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/team.js"></script>
+  <script src="js/ranking.js"></script>
+  <script src="js/friend.js"></script>
+  <script src="js/attendance.js"></script>
+  <script src="js/share.js"></script>
+  <script src="js/contest.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

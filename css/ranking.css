@@ -1,0 +1,13 @@
+/* ranking.css */
+.ranking-modal { max-height: 400px; }
+.ranking-tabs { display: flex; gap: 4px; margin-bottom: 12px; background: var(--bg); border-radius: 8px; padding: 3px; }
+.ranking-tab { flex: 1; padding: 6px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); transition: all 0.2s; }
+.ranking-tab.active { background: var(--primary); color: white; }
+.ranking-list { max-height: 300px; overflow-y: auto; }
+.ranking-item { display: flex; align-items: center; gap: 8px; padding: 8px 4px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.ranking-item.is-me { background: #F8F5FF; border-radius: 6px; }
+.ranking-item.top3 .ranking-medal { font-size: 1.1rem; }
+.ranking-medal { min-width: 28px; text-align: center; font-weight: 700; }
+.ranking-tama-name { font-weight: 700; }
+.ranking-student-name { color: var(--text-muted); font-size: 0.75rem; }
+.ranking-value { margin-left: auto; font-weight: 600; color: var(--primary); }

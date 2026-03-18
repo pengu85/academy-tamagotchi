@@ -1,0 +1,17 @@
+{
+  "name": "학원 다마고치",
+  "short_name": "다마고치",
+  "description": "수학학원 미션 수행으로 다마고치를 키우세요!",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#6C5CE7",
+  "theme_color": "#6C5CE7",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐣</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

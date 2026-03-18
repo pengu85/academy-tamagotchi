@@ -1,0 +1,243 @@
+/* ============================================
+   shop.css - 상점/꾸미기 스타일
+   ============================================ */
+
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.points-display {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.shop-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.shop-tab {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.shop-tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* 아이템 그리드 */
+.item-categories h3 {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 12px 0 8px;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.item-card {
+  text-align: center;
+  padding: 10px 6px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.item-card.owned {
+  border-color: var(--success);
+  background: #F0FFF4;
+}
+
+.item-card.locked {
+  opacity: 0.5;
+}
+
+.item-icon {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.item-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.item-price {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin: 4px 0;
+}
+
+.owned-label {
+  color: var(--success) !important;
+  font-weight: 600;
+}
+
+/* 커스터마이징 */
+.customize-section h3 {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 14px 0 8px;
+}
+
+.customize-preview {
+  text-align: center;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+.customize-preview svg {
+  margin: 0 auto;
+}
+
+.color-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.color-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.color-btn.active {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--text);
+}
+
+.color-btn.locked {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.style-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.style-btn {
+  padding: 6px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.style-btn.active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: white;
+}
+
+.style-btn.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.equip-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.equip-btn {
+  padding: 6px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.equip-btn.equipped {
+  border-color: var(--success);
+  background: #F0FFF4;
+}
+
+/* 능력치 배분 */
+.stats-section {
+  padding: 8px 0;
+}
+
+.stats-points {
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-info {
+  min-width: 55px;
+}
+
+.stat-icon { font-size: 1rem; }
+
+.stat-name {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.stat-desc {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.stat-bar-container {
+  flex: 1;
+  height: 10px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.stat-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  border-radius: 5px;
+  transition: width 0.3s;
+}
+
+.stat-value {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}

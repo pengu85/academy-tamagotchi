@@ -1,0 +1,58 @@
+/* tutorial.css */
+.tutorial-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 3000; opacity: 0; transition: opacity 0.3s; padding: 20px;
+}
+.tutorial-overlay.active { opacity: 1; }
+
+.tutorial-modal {
+  background: white; border-radius: 20px; width: 100%; max-width: 380px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden;
+  transform: scale(0.9); transition: transform 0.3s;
+}
+.tutorial-overlay.active .tutorial-modal { transform: scale(1); }
+
+.tutorial-progress {
+  display: flex; gap: 6px; justify-content: center; padding: 16px 16px 0;
+}
+.progress-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--border); transition: all 0.3s;
+}
+.progress-dot.active { background: var(--primary); transform: scale(1.3); }
+.progress-dot.done { background: var(--primary-light); }
+
+.tutorial-body { padding: 20px 24px; min-height: 220px; }
+
+.tuto-center { text-align: center; }
+.tuto-center h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.tuto-center p { color: var(--text-muted); font-size: 0.9rem; }
+
+.tuto-step {}
+.tuto-icon { font-size: 2rem; margin-bottom: 8px; }
+.tuto-step h3 { font-size: 1rem; margin-bottom: 10px; }
+.tuto-step ul { list-style: none; padding: 0; }
+.tuto-step li {
+  font-size: 0.85rem; padding: 4px 0; padding-left: 20px;
+  position: relative; color: var(--text);
+}
+.tuto-step li::before {
+  content: "•"; position: absolute; left: 4px; color: var(--primary); font-weight: 700;
+}
+.tuto-warn {
+  margin-top: 10px; padding: 6px 10px; background: #FFF3CD;
+  border-radius: 6px; font-size: 0.8rem; color: #856404;
+}
+
+.tutorial-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px; border-top: 1px solid var(--border);
+}
+.tutorial-count { font-size: 0.75rem; color: var(--text-muted); }
+
+.tutorial-skip {
+  display: block; width: 100%; padding: 10px; text-align: center;
+  font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border);
+}
+.tutorial-skip:hover { color: var(--text); background: var(--bg); }

@@ -1,0 +1,253 @@
+/* ============================================
+   tamagotchi.css - 홈 화면, 다마고치 캐릭터 스타일
+   ============================================ */
+
+.home-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.tama-display {
+  text-align: center;
+  padding: 10px;
+}
+
+.tama-character {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  animation: tama-float 3s ease-in-out infinite;
+}
+
+.tama-character svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes tama-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.tama-info {
+  margin-top: 8px;
+}
+
+.tama-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tama-level {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* 경험치 바 */
+.exp-section {
+  width: 100%;
+  max-width: 300px;
+}
+
+.exp-bar {
+  width: 100%;
+  height: 14px;
+  background: var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary));
+  border-radius: 7px;
+  transition: width 0.5s ease;
+}
+
+.exp-text {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* 능력치 표시 */
+.stats-display {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.stat-label {
+  color: var(--text-muted);
+}
+
+.stat-num {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* 홈 푸터 */
+.home-footer {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  width: 100%;
+}
+
+.footer-stat {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* 진화 단계 표시 */
+.evolution-stage-label {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* 진화 모달 */
+.evolution-animation {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.evolution-character {
+  margin: 12px auto;
+}
+
+.evolution-character svg {
+  margin: 0 auto;
+}
+
+.evolution-stages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.evolution-from {
+  color: var(--text-muted);
+}
+
+.evolution-arrow {
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.evolution-to {
+  color: var(--primary);
+}
+
+.evolution-text {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.evolution-form-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-top: 8px;
+}
+
+.evolution-form-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* 진화 도감 */
+.dex-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.dex-item {
+  text-align: center;
+  padding: 10px 6px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+
+.dex-item.locked {
+  opacity: 0.5;
+}
+
+.dex-stage {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.dex-character {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dex-character svg {
+  margin: 0 auto;
+}
+
+.dex-silhouette {
+  width: 60px;
+  height: 60px;
+  background: var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  margin: 0 auto;
+}
+
+.dex-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.dex-level {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.dex-status {
+  font-size: 0.9rem;
+  margin-top: 2px;
+}

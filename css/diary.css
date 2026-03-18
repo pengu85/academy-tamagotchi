@@ -1,0 +1,5 @@
+/* diary.css */
+.diary-list { max-height: 400px; overflow-y: auto; }
+.diary-entry { padding: 12px; border-bottom: 1px solid var(--border); }
+.diary-date { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+.diary-content p { font-size: 0.85rem; line-height: 1.6; margin-bottom: 4px; color: var(--text); }

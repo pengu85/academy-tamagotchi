@@ -1,0 +1,198 @@
+/* ============================================
+   admin.css - 관리자 모드 스타일
+   ============================================ */
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.admin-tab {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg);
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.admin-tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+.admin-section {
+  padding: 8px 0;
+}
+
+.admin-section h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+/* 인증코드 */
+.code-section {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.code-section h3 {
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.code-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.code-value {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--primary);
+}
+
+/* 미션 리스트 (관리자) */
+.mission-item-admin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mission-type-badge {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.mission-item-admin .mission-title {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.mission-item-admin .mission-exp {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.mission-item-admin .mission-repeat {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* 학생 리스트 (관리자) */
+.student-item-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.student-info span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* 미션 직접 승인 */
+.approve-mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.approve-mission-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* 경연대회 관리 */
+.contest-admin-info {
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+}
+
+.contest-admin-info p {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+/* 간식상자 */
+.snackbox-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 설정 - 입력 행 */
+.input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-row input { flex: 1; }
+
+/* 백업 섹션 */
+.backup-section {
+  padding: 14px;
+  background: var(--bg);
+  border-radius: var(--radius);
+}
+
+.backup-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.backup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.backup-upload-label {
+  text-align: center;
+  cursor: pointer;
+}

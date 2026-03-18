@@ -1,0 +1,22 @@
+/* event.css */
+.event-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+  border-radius: var(--radius);
+  color: white;
+  margin-bottom: 12px;
+  animation: banner-glow 2s ease-in-out infinite alternate;
+}
+@keyframes banner-glow {
+  0% { box-shadow: 0 0 5px rgba(108,92,231,0.3); }
+  100% { box-shadow: 0 0 15px rgba(108,92,231,0.6); }
+}
+.event-banner-icon { font-size: 1.5rem; }
+.event-banner-text { display: flex; flex-direction: column; font-size: 0.8rem; }
+.event-banner-text strong { font-size: 0.95rem; }
+.event-admin-info { padding: 12px; background: var(--bg); border-radius: var(--radius); }
+.event-admin-info p { margin-bottom: 6px; font-size: 0.9rem; }
+.event-presets { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }

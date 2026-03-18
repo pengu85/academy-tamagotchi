@@ -1,0 +1,109 @@
+/* ============================================
+   minigame.css - 수학 미니게임 스타일
+   ============================================ */
+
+.minigame-screen {
+  text-align: center;
+}
+
+.minigame-screen h2 { margin-bottom: 8px; }
+
+.minigame-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  margin: 12px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.minigame-done {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 16px;
+}
+
+/* 문제 화면 */
+.minigame-question {
+  padding: 20px 0;
+}
+
+.question-progress {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.question-text {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+}
+
+.question-input {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-input input {
+  width: 120px;
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.question-input input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.question-score {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* 결과 화면 */
+.minigame-result {
+  padding: 24px 0;
+}
+
+.result-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.result-score {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.result-exp {
+  font-size: 1rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.result-perfect {
+  font-size: 0.9rem;
+  color: var(--warning);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.minigame-result .btn {
+  margin-top: 20px;
+}
