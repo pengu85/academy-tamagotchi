@@ -45,6 +45,7 @@ const Admin = {
       tab.addEventListener("click", () => {
         container.querySelectorAll(".admin-tab").forEach((t) => t.classList.remove("active"));
         tab.classList.add("active");
+        tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
         switch (tab.dataset.adminTab) {
           case "missions": this._renderMissions(content); break;
           case "students": this._renderStudents(content); break;
@@ -441,11 +442,12 @@ const Admin = {
     // PIN 변경
     document.getElementById("change-pin-btn").addEventListener("click", () => {
       const newPin = document.getElementById("new-pin").value;
-      if (newPin.length === 4) {
+      if (/^\d{4}$/.test(newPin)) {
         Storage.setAdminPin(newPin);
+        document.getElementById("new-pin").value = "";
         UI.showToast("PIN이 변경되었어요!", "success");
       } else {
-        UI.showToast("PIN은 4자리여야 해요", "error");
+        UI.showToast("PIN은 숫자 4자리여야 해요", "error");
       }
     });
 

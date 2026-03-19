@@ -356,6 +356,7 @@ const App = {
 
     // 룰렛
     document.getElementById("spin-roulette")?.addEventListener("click", () => {
+      Sound.roulette();
       const reward = Secret.spin(student);
       if (reward) {
         UI.showModal("🎰 행운의 룰렛!", `

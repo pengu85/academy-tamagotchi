@@ -191,10 +191,18 @@ body {
   border-radius: 16px;
   width: 100%;
   max-width: 360px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 10px 40px rgba(0,0,0,0.15);
   overflow: hidden;
   transform: scale(0.9);
   transition: transform 0.2s;
+}
+
+.modal-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-overlay.active .modal { transform: scale(1); }
