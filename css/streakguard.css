@@ -1,0 +1,68 @@
+/* ============================================
+   streakguard.css - 스트릭 위기 경고 스타일
+   ============================================ */
+
+.streak-guard {
+  width: 100%;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  animation: streakPulse 2s ease-in-out infinite;
+}
+
+.streak-guard.low {
+  background: #FFF9DB;
+  border: 1.5px solid #FFEAA7;
+}
+.streak-guard.high {
+  background: #FFF3E0;
+  border: 1.5px solid #FFB74D;
+}
+.streak-guard.critical {
+  background: #FFEBEE;
+  border: 1.5px solid #EF5350;
+  animation: streakCritical 1s ease-in-out infinite;
+}
+
+@keyframes streakPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes streakCritical {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.01); box-shadow: 0 0 12px rgba(239, 83, 80, 0.3); }
+}
+
+.streak-guard-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.streak-guard-fire { font-size: 1.3rem; flex-shrink: 0; }
+
+.streak-guard-text { min-width: 0; }
+.streak-guard-msg {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2D3436;
+  line-height: 1.3;
+}
+.streak-guard-sub {
+  font-size: 0.7rem;
+  color: #636E72;
+  margin-top: 2px;
+}
+
+.streak-guard-btn {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  white-space: nowrap;
+}

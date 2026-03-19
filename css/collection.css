@@ -1,0 +1,79 @@
+/* ============================================
+   collection.css - 아이템 도감 스타일
+   ============================================ */
+
+.coll-header { margin-bottom: 14px; }
+
+.coll-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.coll-progress-bar {
+  flex: 1;
+  height: 14px;
+  background: #F1F2F6;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.coll-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6C5CE7, #A29BFE);
+  border-radius: 7px;
+  transition: width 0.5s;
+}
+.coll-progress-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #6C5CE7;
+  white-space: nowrap;
+}
+
+.coll-cat-title {
+  font-size: 0.9rem;
+  margin: 12px 0 6px;
+  color: #2D3436;
+}
+
+.coll-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.coll-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border: 2px solid #E8E8E8;
+  border-radius: 10px;
+  background: white;
+  transition: all 0.2s;
+}
+.coll-card.locked {
+  opacity: 0.45;
+  filter: grayscale(0.5);
+}
+
+.coll-card-icon { font-size: 1.4rem; }
+.coll-card-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #2D3436;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.coll-rarity {
+  font-size: 0.6rem;
+  letter-spacing: -1px;
+}
+
+.coll-color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.1);
+}

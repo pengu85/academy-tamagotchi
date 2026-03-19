@@ -271,6 +271,7 @@ const App = {
 
     content.innerHTML = `
       <div class="home-screen">
+        ${StreakGuard.renderBanner(student)}
         ${GameEvent.renderBanner()}
         ${this._welcomeShown ? '' : (() => { const wr = Emotion.getWelcomeReaction(student); this._welcomeShown = true; return wr ? `<div class="emotion-welcome ${wr.type}"><span class="emotion-welcome-emojis">${wr.emojis[0]}</span><span class="emotion-welcome-speech">${UI.esc(wr.speech)}</span></div>` : ''; })()}
         ${Secret.renderRoulette(student)}
@@ -318,7 +319,8 @@ const App = {
 
         <div class="home-buttons">
           <button class="btn btn-secondary btn-small" id="diary-btn">📖 일기</button>
-          <button class="btn btn-secondary btn-small" id="dex-btn">🔬 도감</button>
+          <button class="btn btn-secondary btn-small" id="dex-btn">🔬 진화도감</button>
+          <button class="btn btn-secondary btn-small" id="collection-btn">📖 아이템도감</button>
           <button class="btn btn-secondary btn-small" id="badge-btn">🏅 업적</button>
           <button class="btn btn-secondary btn-small" id="calendar-btn">📅 출석</button>
           <button class="btn btn-secondary btn-small" id="ranking-btn">📊 랭킹</button>
@@ -402,6 +404,10 @@ const App = {
       this.showEvolutionDex(student);
     });
 
+    document.getElementById("collection-btn").addEventListener("click", () => {
+      Collection.show(student);
+    });
+
     document.getElementById("shop-btn")?.addEventListener("click", () => {
       this.switchTab("shop");
     });
@@ -429,6 +435,9 @@ const App = {
     document.getElementById("share-btn").addEventListener("click", () => {
       Share.downloadCard(student);
     });
+
+    // 스트릭 위기 배너 이벤트
+    StreakGuard.bindEvents();
 
     // 뱃지 자동 체크
     const newBadges = Badge.checkNewBadges(student);
