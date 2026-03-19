@@ -55,7 +55,13 @@ const Lootbox = {
         student.tamagotchi.points += reward.value;
         break;
       case "exp":
-        Tamagotchi.addExp(student, reward.value);
+        const expResult = Tamagotchi.addExp(student, reward.value);
+        if (expResult.levelUps && expResult.levelUps.length > 0) {
+          setTimeout(() => {
+            Sound.levelUp();
+            expResult.levelUps.forEach((lu) => UI.showLevelUp(lu.level, lu.reward));
+          }, 2500);
+        }
         break;
       case "snackBox":
         student.snackBoxChances += reward.value;
@@ -81,16 +87,18 @@ const Lootbox = {
 
   // 카드 뽑기 모달 표시
   showDraw(student) {
+    // 기존 오버레이 제거
+    document.querySelectorAll(".loot-overlay").forEach((el) => el.remove());
+
     const rarity = this._rollRarity();
     const rewards = this.REWARDS[rarity.id];
     const reward = rewards[Math.floor(Math.random() * rewards.length)];
 
-    // 카드 뽑기 애니메이션
     const overlay = document.createElement("div");
     overlay.className = "loot-overlay";
     overlay.innerHTML = `
       <div class="loot-card-wrapper">
-        <div class="loot-card back" id="loot-card">
+        <div class="loot-card back">
           <div class="loot-card-back">
             <div class="loot-card-back-icon">\u2753</div>
             <div class="loot-card-back-text">\uD0ED\uD574\uC11C \uC5F4\uAE30!</div>
@@ -101,9 +109,12 @@ const Lootbox = {
     document.body.appendChild(overlay);
     requestAnimationFrame(() => overlay.classList.add("active"));
 
-    const card = document.getElementById("loot-card");
-    card.addEventListener("click", () => {
-      if (card.classList.contains("flipped")) return;
+    const card = overlay.querySelector(".loot-card");
+    let flipped = false;
+
+    const doFlip = () => {
+      if (flipped) return;
+      flipped = true;
       card.classList.remove("back");
       card.classList.add("flipped");
 
@@ -116,14 +127,18 @@ const Lootbox = {
         </div>
       `;
 
-      // Apply reward
+      // Apply reward (레벨업/진화 알림 포함)
       this._applyReward(student, reward);
 
-      // Close after delay
       setTimeout(() => {
         overlay.classList.remove("active");
         setTimeout(() => overlay.remove(), 300);
       }, 2200);
-    }, { once: true });
+    };
+
+    card.addEventListener("click", doFlip, { once: true });
+
+    // 자동 닫기: 6초 후 클릭 안 하면 자동 뒤집기
+    setTimeout(() => doFlip(), 6000);
   },
 };

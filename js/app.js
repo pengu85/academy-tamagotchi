@@ -269,11 +269,25 @@ const App = {
     // 돌봄 게이지 업데이트
     Care.updateGauges(student);
 
+    // 환영 메시지 (세션 최초 1회)
+    let welcomeHtml = "";
+    if (!this._welcomeShown) {
+      const wr = Emotion.getWelcomeReaction(student);
+      this._welcomeShown = true;
+      if (wr) {
+        welcomeHtml = `<div class="emotion-welcome ${wr.type}"><span class="emotion-welcome-emojis">${wr.emojis[0]}</span><span class="emotion-welcome-speech">${UI.esc(wr.speech)}</span></div>`;
+      }
+    }
+
+    // 오늘 기분 (중복 호출 방지)
+    const todayMood = Mood.getTodayMood(student);
+    const moodBadgeHtml = todayMood ? `<div class="mood-today-badge" id="mood-badge">${todayMood.emoji} 오늘의 기분: ${todayMood.label}</div>` : "";
+
     content.innerHTML = `
       <div class="home-screen">
         ${StreakGuard.renderBanner(student)}
         ${GameEvent.renderBanner()}
-        ${this._welcomeShown ? '' : (() => { const wr = Emotion.getWelcomeReaction(student); this._welcomeShown = true; return wr ? `<div class="emotion-welcome ${wr.type}"><span class="emotion-welcome-emojis">${wr.emojis[0]}</span><span class="emotion-welcome-speech">${UI.esc(wr.speech)}</span></div>` : ''; })()}
+        ${welcomeHtml}
         ${Secret.renderRoulette(student)}
         ${ClassPet.renderWidget()}
         <div class="tama-display">
@@ -286,7 +300,7 @@ const App = {
             <div class="tama-level">Lv. ${tama.level}</div>
             <div class="evolution-stage-label">${evoLabel} 단계</div>
             <div class="mood-label">${moodInfo.icon} ${moodInfo.name}</div>
-            ${Mood.getTodayMood(student) ? `<div class="mood-today-badge" id="mood-badge">${Mood.getTodayMood(student).emoji} 오늘의 기분: ${Mood.getTodayMood(student).label}</div>` : ''}
+            ${moodBadgeHtml}
           </div>
         </div>
 
@@ -570,14 +584,10 @@ const App = {
           const completedMission = missions2.find((m) => m.id === missionId);
           ClassPet.contribute(student.id, completedMission?.type === "attendance" ? "attendance" : "mission");
 
-          // 랜덤 보상 카드 (30% 확률)
-          if (Math.random() < 0.3) {
-            setTimeout(() => Lootbox.showDraw(student), 300);
-          }
-
           const levelUps = result.levelUps || [];
           const evolutions = result.evolutions || [];
           let delay = 500;
+          const showLootbox = Math.random() < 0.3;
 
           if (levelUps.length > 0) {
             setTimeout(() => {
@@ -612,6 +622,12 @@ const App = {
           const newBadges = Badge.checkNewBadges(latestForBadge);
           if (newBadges.length > 0) {
             setTimeout(() => newBadges.forEach((b) => Badge.showBadgeNotification(b)), delay);
+            delay += 1000;
+          }
+
+          // 랜덤 보상 카드 (모든 알림 이후)
+          if (showLootbox) {
+            setTimeout(() => Lootbox.showDraw(Storage.getCurrentStudent()), delay);
           }
 
           this.renderMission();

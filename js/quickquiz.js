@@ -7,6 +7,9 @@ const QuickQuiz = {
 
   // 돌봄 전 퀴즈 표시. 맞히든 틀리든 돌봄은 수행, 맞히면 보너스
   showBeforeCare(student, careType) {
+    // 기존 오버레이 제거
+    document.querySelectorAll(".qq-overlay").forEach((el) => el.remove());
+
     return new Promise((resolve) => {
       const difficulty = Math.min(5, Math.ceil(student.tamagotchi.level / 3));
       const q = generateMathQuestion(difficulty);
@@ -40,7 +43,7 @@ const QuickQuiz = {
 
       document.body.appendChild(overlay);
       requestAnimationFrame(() => overlay.classList.add("active"));
-      document.getElementById("qq-answer")?.focus();
+      overlay.querySelector(".qq-input")?.focus();
 
       const close = (correct) => {
         overlay.classList.remove("active");
@@ -49,7 +52,7 @@ const QuickQuiz = {
       };
 
       const submit = () => {
-        const input = document.getElementById("qq-answer");
+        const input = overlay.querySelector(".qq-input");
         const userAnswer = parseInt(input.value);
         if (isNaN(userAnswer)) {
           input.classList.add("qq-shake");
@@ -84,13 +87,13 @@ const QuickQuiz = {
         setTimeout(() => close(correct), 1500);
       };
 
-      document.getElementById("qq-submit").addEventListener("click", submit);
-      document.getElementById("qq-answer").addEventListener("keyup", (e) => {
+      overlay.querySelector(".qq-submit").addEventListener("click", submit);
+      overlay.querySelector(".qq-input").addEventListener("keyup", (e) => {
         if (e.key === "Enter") submit();
       });
 
       // Skip: care without bonus
-      document.getElementById("qq-skip").addEventListener("click", () => {
+      overlay.querySelector(".qq-skip").addEventListener("click", () => {
         close(false);
       });
     });

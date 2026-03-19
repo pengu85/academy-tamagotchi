@@ -116,7 +116,7 @@ const Collection = {
       cat.items.forEach((item) => {
         const isOwned = tama.ownedItems.includes(item.id);
         const rarity = this.getRarityInfo(item.id);
-        html += this._renderCard(item.name, Shop._getItemEmoji(item), isOwned, rarity);
+        html += this._renderCard(item.name, this._getEmoji(item.imageData), isOwned, rarity);
       });
       html += "</div>";
     });
@@ -159,6 +159,16 @@ const Collection = {
     }
 
     UI.showModal("\u{1F4D6} \uC544\uC774\uD15C \uB3C4\uAC10", html, [{ text: "\uB2EB\uAE30", class: "btn btn-secondary" }]);
+  },
+
+  _getEmoji(imageData) {
+    const emojis = {
+      crown: "\u{1F451}", cap: "\u{1F9E2}", headband: "\u{1F380}", wizard: "\u{1F9D9}", santa: "\u{1F385}", flower: "\u{1F338}",
+      glasses: "\u{1F453}", necklace: "\u{1F4FF}", wings: "\u{1FABD}", cape: "\u{1F9B8}", bow: "\u{1F380}",
+      space: "\u{1F30C}", ocean: "\u{1F30A}", forest: "\u{1F332}",
+      sparkle: "\u2728", halo: "\u{1F607}", fire: "\u{1F525}",
+    };
+    return emojis[imageData] || "\u{1F4E6}";
   },
 
   _renderCard(name, icon, isOwned, rarity) {

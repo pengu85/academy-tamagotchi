@@ -84,6 +84,10 @@
   color: #B2BEC3;
 }
 
+.cal-cell.weekend .cal-date {
+  color: #B2BEC3;
+}
+
 .cal-cell.future .cal-date {
   color: #DFE6E9;
 }

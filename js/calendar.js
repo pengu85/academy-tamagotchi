@@ -77,13 +77,16 @@ const Calendar = {
     for (let d = 1; d <= daysInMonth; d++) {
       const isToday = d === todayDate && month === todayMonth && year === todayYear;
       const attended = attendedDates.has(d);
-      const isPast = new Date(year, month, d) < new Date(todayYear, todayMonth, todayDate);
-      const isFuture = new Date(year, month, d) > new Date(todayYear, todayMonth, todayDate);
+      const dayDate = new Date(year, month, d);
+      const isPast = dayDate < new Date(todayYear, todayMonth, todayDate);
+      const isFuture = dayDate > new Date(todayYear, todayMonth, todayDate);
+      const isWeekend = dayDate.getDay() === 0 || dayDate.getDay() === 6;
 
       let cls = "cal-cell";
       if (isToday) cls += " today";
       if (attended) cls += " attended";
-      if (isPast && !attended) cls += " missed";
+      if (isPast && !attended && !isWeekend) cls += " missed";
+      if (isWeekend && !attended) cls += " weekend";
       if (isFuture) cls += " future";
 
       const stamp = attended ? '<span class="cal-stamp">\u2705</span>' : "";

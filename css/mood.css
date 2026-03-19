@@ -60,6 +60,13 @@
   background: #F8F5FF;
   transform: scale(1.05);
 }
+.mood-checkin-skip {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #B2BEC3;
+}
+.mood-checkin-skip:hover { color: #636E72; }
+
 .mood-checkin-emoji { font-size: 2rem; }
 .mood-checkin-label { font-size: 0.85rem; font-weight: 600; color: #2D3436; }
 

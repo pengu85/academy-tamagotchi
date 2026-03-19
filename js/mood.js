@@ -42,10 +42,20 @@ const Mood = {
         <div class="mood-checkin-grid">
           ${moodButtons}
         </div>
+        <button class="btn btn-ghost btn-small mood-checkin-skip">\uB098\uC911\uC5D0 \uD560\uB798\uC694</button>
       </div>
     `;
     document.body.appendChild(overlay);
     requestAnimationFrame(() => overlay.classList.add("active"));
+
+    // 스킵 버튼
+    overlay.querySelector(".mood-checkin-skip")?.addEventListener("click", () => {
+      overlay.classList.remove("active");
+      setTimeout(() => {
+        overlay.remove();
+        if (onComplete) onComplete();
+      }, 300);
+    });
 
     overlay.querySelectorAll(".mood-checkin-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
