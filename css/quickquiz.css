@@ -1,0 +1,139 @@
+/* ============================================
+   quickquiz.css - 퀵 퀴즈 돌봄 스타일
+   ============================================ */
+
+.qq-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  padding: 20px;
+}
+.qq-overlay.active { opacity: 1; }
+
+.qq-card {
+  background: white;
+  border-radius: 20px;
+  max-width: 340px;
+  width: 100%;
+  overflow: hidden;
+  animation: qqBounce 0.4s ease;
+}
+
+@keyframes qqBounce {
+  0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+  60% { transform: scale(1.03); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.qq-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  color: white;
+}
+.qq-care-icon { font-size: 1.5rem; }
+.qq-care-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.qq-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.qq-desc {
+  font-size: 0.85rem;
+  color: #636E72;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.qq-question {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2D3436;
+  padding: 16px;
+  background: #F8F5FF;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.qq-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.qq-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: 2px solid #DFE6E9;
+  border-radius: 12px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.qq-input:focus {
+  border-color: #6C5CE7;
+}
+
+.qq-submit {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+}
+
+.qq-skip {
+  font-size: 0.8rem;
+  color: #B2BEC3;
+  padding: 6px 12px;
+}
+.qq-skip:hover { color: #636E72; }
+
+/* Shake animation for invalid input */
+@keyframes qqShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.qq-shake { animation: qqShake 0.4s ease; }
+
+/* Result */
+.qq-result {
+  padding: 30px 20px;
+  text-align: center;
+  animation: qqPop 0.3s ease;
+}
+
+@keyframes qqPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.qq-result-icon { font-size: 3rem; margin-bottom: 10px; }
+
+.qq-result-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.qq-result.correct .qq-result-text { color: #00B894; }
+.qq-result.wrong .qq-result-text { color: #E17055; }
+
+.qq-result-sub {
+  font-size: 0.9rem;
+  color: #636E72;
+}

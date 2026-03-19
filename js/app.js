@@ -330,22 +330,35 @@ const App = {
       </div>
     `;
 
-    // 돌봄 버튼 (리액션 포함)
+    // 돌봄 버튼 (퀵 퀴즈 연동)
     const careHandler = (action) => {
       const r = action();
       if (r.success && r.reaction) {
         Sound.care();
         UI.showReaction(r.reaction);
-        // 리액션 끝나면 화면 갱신
         setTimeout(() => this.renderHome(), 2500);
       } else {
         UI.showToast(r.message, "error");
       }
     };
 
-    document.getElementById("care-feed")?.addEventListener("click", () => careHandler(() => Care.feed(student)));
-    document.getElementById("care-wash")?.addEventListener("click", () => careHandler(() => Care.wash(student)));
-    document.getElementById("care-play")?.addEventListener("click", () => careHandler(() => Care.play(student)));
+    const quizCareHandler = async (careType, careAction) => {
+      // 이미 완료된 돌봄이면 퀴즈 없이 바로 메시지
+      const care = student.care || {};
+      if ((careType === "feed" && care.fedToday) ||
+          (careType === "wash" && care.washedToday) ||
+          (careType === "play" && care.playedToday)) {
+        careHandler(careAction);
+        return;
+      }
+      // 퀵 퀴즈 후 돌봄
+      await QuickQuiz.showBeforeCare(student, careType);
+      careHandler(careAction);
+    };
+
+    document.getElementById("care-feed")?.addEventListener("click", () => quizCareHandler("feed", () => Care.feed(student)));
+    document.getElementById("care-wash")?.addEventListener("click", () => quizCareHandler("wash", () => Care.wash(student)));
+    document.getElementById("care-play")?.addEventListener("click", () => quizCareHandler("play", () => Care.play(student)));
 
     // 할인 상점 구매
     document.getElementById("buy-deal")?.addEventListener("click", () => {
