@@ -132,6 +132,7 @@ const Care = {
     if (student.care.isSick && student.care.hunger > 30 && student.care.clean > 30 && student.care.fun > 30) {
       student.care.isSick = false;
       student.care.recoveredCount = (student.care.recoveredCount || 0) + 1;
+      Diary.addRecovery(student);
       UI.showToast("다마고치가 건강을 회복했어요! 💊", "success");
     }
   },

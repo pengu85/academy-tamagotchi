@@ -13,6 +13,7 @@ const Minigame = {
     const today = new Date().toISOString().split("T")[0];
     if (student.lastMinigameDate !== today) {
       student.minigameToday = 0;
+      student.perfectMinigameToday = false;
       student.lastMinigameDate = today;
       Storage.updateStudent(student);
     }
@@ -129,6 +130,7 @@ const Minigame = {
     student.minigameToday = (student.minigameToday || 0) + 1;
     if (isPerfect) {
       student.perfectMinigames = (student.perfectMinigames || 0) + 1;
+      student.perfectMinigameToday = true;
     }
     Storage.updateStudent(student);
 

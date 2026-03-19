@@ -136,10 +136,13 @@ const Admin = {
     document.getElementById("add-mission-btn").addEventListener("click", async () => {
       const result = await UI.prompt("미션 추가", [
         { id: "title", label: "미션 이름", placeholder: "예: 수학 숙제 제출" },
+        { id: "description", label: "설명", placeholder: "미션 설명을 입력하세요" },
         { id: "exp", label: "보상 경험치", type: "number", value: "30" },
         { id: "type", label: "유형 (attendance/homework/exam/special)", value: "homework" },
+        { id: "repeatable", label: "반복 여부 (매일: yes / 1회: no)", value: "yes" },
       ]);
       if (result && result.title) {
+        result.repeatable = result.repeatable === "yes" || result.repeatable === "Y";
         Mission.addMission(result);
         UI.showToast("미션이 추가되었어요!", "success");
         this._renderMissions(container);
@@ -153,14 +156,18 @@ const Admin = {
         if (!mission) return;
         const result = await UI.prompt("미션 수정", [
           { id: "title", label: "미션 이름", value: mission.title },
+          { id: "description", label: "설명", value: mission.description || "" },
           { id: "exp", label: "보상 경험치", type: "number", value: String(mission.exp) },
           { id: "type", label: "유형 (attendance/homework/exam/special)", value: mission.type },
+          { id: "repeatable", label: "반복 여부 (매일: yes / 1회: no)", value: mission.repeatable ? "yes" : "no" },
         ]);
         if (result && result.title) {
           Mission.updateMission(mission.id, {
             title: result.title,
+            description: result.description || "",
             exp: parseInt(result.exp) || mission.exp,
             type: result.type || mission.type,
+            repeatable: result.repeatable === "yes" || result.repeatable === "Y",
           });
           UI.showToast("미션이 수정되었어요!", "success");
           this._renderMissions(container);

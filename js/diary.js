@@ -37,7 +37,7 @@ const Diary = {
 
     // 미니게임
     if (student.lastMinigameDate === today) {
-      const isPerfect = (student.minigameToday || 0) > 0 && (student.perfectMinigames || 0) > 0;
+      const isPerfect = !!student.perfectMinigameToday;
       entry.lines.push(this._pick(isPerfect ? DIARY_TEMPLATES.minigame_perfect : DIARY_TEMPLATES.minigame));
     }
 

@@ -78,8 +78,9 @@ const Mission = {
     const secretEvo = Secret.checkSecretEvolution(student);
 
     // 연속 출석 7일 달성 시 체력 보너스 (간식상자)
-    if (student.streakDays > 0 && student.streakDays % 7 === 0 && student.tamagotchi.stats.sta > 0) {
+    if (student.streakDays > 0 && student.streakDays % 7 === 0) {
       student.snackBoxChances += 1;
+      student.totalSnackBoxEarned = (student.totalSnackBoxEarned || 0) + 1;
       Storage.updateStudent(student);
     }
 

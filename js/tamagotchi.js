@@ -22,12 +22,17 @@ const Tamagotchi = {
         tama.points += reward.points;
         if (reward.snackBox) {
           student.snackBoxChances += reward.snackBox;
+          student.totalSnackBoxEarned = (student.totalSnackBoxEarned || 0) + reward.snackBox;
         }
         levelUps.push({ level: nextLevel, reward });
+        Diary.addLevelUp(student, nextLevel);
 
         // 진화 체크
         const evo = this.checkEvolution(student);
-        if (evo) evolutions.push(evo);
+        if (evo) {
+          evolutions.push(evo);
+          Diary.addEvolution(student, evo.stageName);
+        }
       } else {
         break;
       }

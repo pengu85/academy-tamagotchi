@@ -132,6 +132,7 @@ function createDefaultStudent(name, tamagotchiName) {
     },
     completedMissions: [],
     snackBoxChances: 0,
+    totalSnackBoxEarned: 0,
     streakDays: 0,
     lastAttendance: null,
     badges: [],

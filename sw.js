@@ -2,7 +2,7 @@
 // sw.js - Service Worker (PWA 오프라인 지원)
 // ============================================
 
-const CACHE_NAME = "tamagotchi-v1";
+const CACHE_NAME = "tamagotchi-v2";
 const ASSETS = [
   "./index.html",
   "./css/reset.css",
@@ -24,6 +24,10 @@ const ASSETS = [
   "./css/dashboard.css",
   "./css/house.css",
   "./css/tutorial.css",
+  "./css/friend.css",
+  "./css/attendance.css",
+  "./css/mood.css",
+  "./css/report.css",
   "./js/data.js",
   "./js/storage.js",
   "./js/sound.js",
@@ -43,6 +47,10 @@ const ASSETS = [
   "./js/shop.js",
   "./js/team.js",
   "./js/ranking.js",
+  "./js/mood.js",
+  "./js/report.js",
+  "./js/friend.js",
+  "./js/attendance.js",
   "./js/share.js",
   "./js/contest.js",
   "./js/admin.js",
