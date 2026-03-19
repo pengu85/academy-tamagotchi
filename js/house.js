@@ -52,7 +52,9 @@ const House = {
   _renderRoom(student) {
     this.ensure(student);
     const house = student.house;
-    const wall = HOUSE_WALLPAPERS.find((w) => w.id === house.wallpaper) || HOUSE_WALLPAPERS[0];
+    const wall = HOUSE_WALLPAPERS.find((w) => w.id === house.wallpaper)
+      || this._findSeasonalWall(house.wallpaper)
+      || HOUSE_WALLPAPERS[0];
     const floor = HOUSE_FLOORS.find((f) => f.id === house.floor) || HOUSE_FLOORS[0];
     const mood = calculateMood(student);
 
@@ -88,6 +90,14 @@ const House = {
     `;
   },
 
+  _findSeasonalWall(wallId) {
+    for (const items of Object.values(SEASONAL_ITEMS)) {
+      const found = items.find((i) => i.type === "wallpaper" && i.id === wallId);
+      if (found) return { id: found.id, name: found.name, color: found.color, pattern: found.pattern, cost: 0 };
+    }
+    return null;
+  },
+
   _renderShop(tab, student, container) {
     const shop = container.querySelector("#house-shop");
     this.ensure(student);
@@ -108,6 +118,21 @@ const House = {
               `<div class="decor-price">${w.cost}p</div>`}
           </div>
         `;
+      });
+      // 보유 중인 계절 벽지도 표시
+      Object.values(SEASONAL_ITEMS).flat().filter((i) => i.type === "wallpaper").forEach((sw) => {
+        if (house.ownedDecor.includes(sw.id)) {
+          const active = house.wallpaper === sw.id;
+          html += `
+            <div class="decor-card ${active ? 'equipped' : ''}" data-wall="${sw.id}">
+              <div class="decor-swatch" style="background-color: ${sw.color}">
+                <span style="font-size:1.2rem">${getCurrentSeason().icon}</span>
+              </div>
+              <div class="decor-name">${sw.name}</div>
+              <div class="decor-status">${active ? '사용중' : '적용'}</div>
+            </div>
+          `;
+        }
       });
       html += '</div>';
     }
@@ -173,12 +198,17 @@ const House = {
       el.addEventListener("click", () => {
         const wId = el.dataset.wall;
         const w = HOUSE_WALLPAPERS.find((x) => x.id === wId);
-        if (!w) return;
-        const owned = w.cost === 0 || house.ownedDecor.includes("wall_" + wId);
-        if (!owned) {
-          if (student.tamagotchi.points < w.cost) { UI.showToast("포인트 부족!", "error"); return; }
-          student.tamagotchi.points -= w.cost;
-          house.ownedDecor.push("wall_" + wId);
+        if (w) {
+          // 기본 벽지
+          const owned = w.cost === 0 || house.ownedDecor.includes("wall_" + wId);
+          if (!owned) {
+            if (student.tamagotchi.points < w.cost) { UI.showToast("포인트 부족!", "error"); return; }
+            student.tamagotchi.points -= w.cost;
+            house.ownedDecor.push("wall_" + wId);
+          }
+        } else if (!house.ownedDecor.includes(wId)) {
+          // 계절 벽지인데 보유 안 함
+          return;
         }
         house.wallpaper = wId;
         Storage.updateStudent(student);

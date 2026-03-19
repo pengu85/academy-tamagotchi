@@ -206,6 +206,7 @@ const Admin = {
           </div>
           <div class="student-actions">
             <button class="btn btn-small btn-primary" data-approve-student="${s.id}">미션 승인</button>
+            <button class="btn btn-small btn-secondary" data-reward-student="${s.id}">보상 지급</button>
             <button class="btn btn-small btn-danger" data-delete-student="${s.id}">삭제</button>
           </div>
         </div>
@@ -274,6 +275,49 @@ const Admin = {
             });
           });
         }, 100);
+      });
+    });
+
+    container.querySelectorAll("[data-reward-student]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const student = Storage.getStudent(btn.dataset.rewardStudent);
+        if (!student) return;
+
+        const result = await UI.prompt(`${student.name} 보상 지급`, [
+          { id: "points", label: "포인트 (p)", type: "number", value: "0" },
+          { id: "exp", label: "경험치 (EXP)", type: "number", value: "0" },
+          { id: "snackBox", label: "간식상자 (회)", type: "number", value: "0" },
+          { id: "reason", label: "사유 (선택)", placeholder: "예: 수업 태도 우수" },
+        ]);
+        if (!result) return;
+
+        const points = parseInt(result.points) || 0;
+        const exp = parseInt(result.exp) || 0;
+        const snackBox = parseInt(result.snackBox) || 0;
+
+        if (points === 0 && exp === 0 && snackBox === 0) {
+          UI.showToast("지급할 보상을 입력해주세요", "error");
+          return;
+        }
+
+        const rewards = [];
+        if (points > 0) {
+          student.tamagotchi.points += points;
+          rewards.push(`${points}p`);
+        }
+        if (exp > 0) {
+          Tamagotchi.addExp(student, exp);
+          rewards.push(`${exp} EXP`);
+        }
+        if (snackBox > 0) {
+          student.snackBoxChances += snackBox;
+          student.totalSnackBoxEarned = (student.totalSnackBoxEarned || 0) + snackBox;
+          rewards.push(`간식상자 ${snackBox}회`);
+        }
+
+        Storage.updateStudent(student);
+        UI.showToast(`${student.name}에게 ${rewards.join(" + ")} 지급 완료!`, "success");
+        this._renderStudents(container);
       });
     });
 
