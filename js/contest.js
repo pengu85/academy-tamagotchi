@@ -62,7 +62,7 @@ const Contest = {
     sorted.forEach((s) => {
       const votes = voteCount[s.id] || 0;
       const isMe = student && s.id === student.id;
-      const alreadyVoted = student && (contest.votes[s.id] || []).includes(student.id);
+      const alreadyVoted = student && ((contest.votes || {})[s.id] || []).includes(student.id);
       const canVote = student && !isMe && !alreadyVoted && myVotes < 3;
 
       html += `

@@ -4,7 +4,7 @@
 
 const Ranking = {
   getRanking(category) {
-    const students = Storage.getStudents();
+    const students = [...Storage.getStudents()];
     let sorted;
 
     switch (category) {

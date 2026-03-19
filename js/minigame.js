@@ -29,25 +29,34 @@ const Minigame = {
           <span>문제당 +${MINIGAME_EXP_PER_CORRECT} EXP | 만점 보너스 +${MINIGAME_PERFECT_BONUS} EXP</span>
         </div>
         ${remaining > 0
-          ? `<button class="btn btn-primary btn-large" id="start-minigame">게임 시작!</button>`
+          ? `<div class="minigame-categories">
+              <button class="btn btn-primary" data-game-cat="math">\u{1F9EE} \uC218\uD559</button>
+              <button class="btn btn-secondary" data-game-cat="korean">\u{1F4DA} \uC0AC\uC790\uC131\uC5B4</button>
+              <button class="btn btn-secondary" data-game-cat="english">\u{1F1FA}\u{1F1F8} \uC601\uB2E8\uC5B4</button>
+            </div>`
           : `<p class="minigame-done">오늘은 모두 플레이했어요! 내일 다시 도전하세요.</p>`
         }
         <div id="minigame-area"></div>
       </div>
     `;
 
-    const startBtn = document.getElementById("start-minigame");
-    if (startBtn) {
-      startBtn.addEventListener("click", () => this.startGame(student, container));
-    }
+    container.querySelectorAll("[data-game-cat]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this._category = btn.dataset.gameCat;
+        this.startGame(student, container);
+      });
+    });
   },
 
   startGame(student, container) {
     // 난이도: 레벨 기반
     const difficulty = Math.min(5, Math.ceil(student.tamagotchi.level / 3));
+    const cat = this._category || "math";
     const questions = [];
     for (let i = 0; i < MINIGAME_QUESTIONS; i++) {
-      questions.push(generateMathQuestion(difficulty));
+      if (cat === "korean") questions.push(generateKoreanQuestion());
+      else if (cat === "english") questions.push(generateEnglishQuestion());
+      else questions.push(generateMathQuestion(difficulty));
     }
 
     this.currentGame = {
@@ -71,13 +80,16 @@ const Minigame = {
 
     const q = game.questions[game.currentQ];
     const area = document.getElementById("minigame-area");
+    // 선택지 문제 (영어) vs 입력 문제 (수학/사자성어)
+    const inputHtml = q.isChoice
+      ? `<div class="question-choices">${q.choices.map((c) => `<button class="btn btn-secondary choice-btn" data-choice="${c}">${c}</button>`).join("")}</div>`
+      : `<div class="question-input"><input type="${q.isText ? 'text' : 'number'}" id="answer-input" placeholder="\uC815\uB2F5 \uC785\uB825" autofocus><button class="btn btn-primary" id="submit-answer">\uD655\uC778</button></div>`;
+
     area.innerHTML = `
       <div class="minigame-question">
         <div class="question-progress">${game.currentQ + 1} / ${game.questions.length}</div>
-        <div class="question-text">${q.text}</div>
-        <div class="question-input">
-          <input type="number" id="answer-input" placeholder="정답 입력" autofocus>
-          <button class="btn btn-primary" id="submit-answer">확인</button>
+        <div class="question-text" style="white-space:pre-line">${q.text}</div>
+        ${inputHtml}
         </div>
         <div class="question-score">맞은 수: ${game.correct} / ${game.currentQ}</div>
       </div>
@@ -86,14 +98,10 @@ const Minigame = {
     const submitBtn = document.getElementById("submit-answer");
     const input = document.getElementById("answer-input");
 
-    const submit = () => {
-      const userAnswer = parseInt(input.value);
-      if (isNaN(userAnswer)) {
-        UI.showToast("숫자를 입력해주세요!", "error");
-        return;
-      }
-
-      const correct = userAnswer === q.answer;
+    const checkAnswer = (userAnswer) => {
+      const correct = q.isText || q.isChoice
+        ? String(userAnswer).trim() === String(q.answer).trim()
+        : parseInt(userAnswer) === q.answer;
       if (correct) {
         game.correct++;
         Sound.correct();
@@ -107,9 +115,22 @@ const Minigame = {
       setTimeout(() => this._showQuestion(container), correct ? 500 : 1000);
     };
 
-    submitBtn.addEventListener("click", submit);
-    input.addEventListener("keyup", (e) => { if (e.key === "Enter") submit(); });
-    input.focus();
+    // 선택지 문제
+    area.querySelectorAll(".choice-btn").forEach((btn) => {
+      btn.addEventListener("click", () => checkAnswer(btn.dataset.choice));
+    });
+
+    // 입력 문제
+    const submitBtn = document.getElementById("submit-answer");
+    const input = document.getElementById("answer-input");
+    if (submitBtn && input) {
+      submitBtn.addEventListener("click", () => {
+        if (!input.value.trim()) { UI.showToast("\uC815\uB2F5\uC744 \uC785\uB825\uD574\uC8FC\uC138\uC694!", "error"); return; }
+        checkAnswer(q.isText ? input.value.trim() : parseInt(input.value));
+      });
+      input.addEventListener("keyup", (e) => { if (e.key === "Enter") submitBtn.click(); });
+      input.focus();
+    }
   },
 
   _showResult(container) {

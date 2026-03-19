@@ -1,0 +1,121 @@
+/* ============================================
+   newfeatures.css - 퀘스트/타이머/배틀/교환/학부모/다크모드 스타일
+   ============================================ */
+
+/* === 퀘스트 체인 === */
+.quest-list { display: flex; flex-direction: column; gap: 16px; }
+.quest-chain { border: 2px solid #E8E8E8; border-radius: 14px; padding: 14px; }
+.quest-chain.complete { border-color: #00B894; background: #F0FFF4; }
+.quest-chain-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.quest-chain-icon { font-size: 1.5rem; }
+.quest-chain-info { flex: 1; }
+.quest-chain-name { font-size: 1rem; font-weight: 700; color: #2D3436; }
+.quest-chain-desc { font-size: 0.78rem; color: #636E72; }
+.quest-chain-pct { font-size: 1rem; font-weight: 800; color: #6C5CE7; }
+.quest-chain-bar { height: 6px; background: #F1F2F6; border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+.quest-chain-fill { height: 100%; background: linear-gradient(90deg, #6C5CE7, #A29BFE); border-radius: 3px; }
+.quest-steps { display: flex; flex-direction: column; gap: 6px; }
+.quest-step { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 8px; background: #F8F9FA; }
+.quest-step.done { background: #E8F5E9; }
+.quest-step.active { background: #F8F5FF; border: 1.5px solid #6C5CE7; }
+.quest-step.locked { opacity: 0.5; }
+.quest-step-check { font-size: 0.9rem; flex-shrink: 0; }
+.quest-step-info { flex: 1; }
+.quest-step-title { font-size: 0.85rem; font-weight: 600; }
+.quest-step-desc { font-size: 0.72rem; color: #636E72; }
+.quest-step-reward { font-size: 0.72rem; color: #6C5CE7; font-weight: 600; white-space: nowrap; }
+
+/* === 타이머 === */
+.timer-screen { text-align: center; }
+.timer-today-stat { font-size: 0.85rem; color: #636E72; margin-bottom: 16px; padding: 8px; background: #F8F5FF; border-radius: 10px; }
+.timer-presets { display: flex; flex-direction: column; gap: 10px; }
+.timer-preset-btn {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; background: #F8F9FA; border: 2px solid #E8E8E8;
+  border-radius: 14px; cursor: pointer; transition: all 0.2s;
+}
+.timer-preset-btn:hover { border-color: #6C5CE7; background: #F8F5FF; }
+.timer-preset-time { font-size: 1.2rem; font-weight: 700; color: #2D3436; }
+.timer-preset-reward { font-size: 0.85rem; color: #6C5CE7; font-weight: 600; }
+.timer-active { text-align: center; padding: 20px 0; }
+.timer-circle { position: relative; display: inline-block; margin: 16px 0; }
+.timer-time {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 2.2rem; font-weight: 800; color: #6C5CE7; font-variant-numeric: tabular-nums;
+}
+.timer-reward-info { font-size: 0.9rem; color: #636E72; margin-bottom: 16px; }
+.timer-admin-list { display: flex; flex-direction: column; gap: 4px; }
+.timer-admin-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 12px; background: #F8F9FA; border-radius: 8px; font-size: 0.85rem;
+}
+
+/* === 배틀 === */
+.battle-screen { text-align: center; }
+.battle-info { display: flex; justify-content: space-around; padding: 10px; background: #F8F5FF; border-radius: 10px; margin-bottom: 16px; font-size: 0.85rem; }
+.battle-done { padding: 20px; color: #636E72; font-size: 0.9rem; }
+.battle-opponents { text-align: left; }
+.battle-opponents h3 { font-size: 0.95rem; margin-bottom: 8px; }
+.battle-opponent {
+  display: flex; align-items: center; gap: 10px; padding: 10px;
+  background: #F8F9FA; border-radius: 12px; margin-bottom: 6px;
+}
+.battle-opp-tama { flex-shrink: 0; }
+.battle-opp-tama svg { display: block; }
+.battle-opp-info { flex: 1; }
+.battle-opp-name { font-size: 0.85rem; font-weight: 600; }
+.battle-opp-stats { font-size: 0.75rem; color: #636E72; }
+.battle-record { margin-top: 16px; font-size: 0.9rem; color: #636E72; padding: 10px; background: #FFF9DB; border-radius: 10px; }
+.battle-result { text-align: center; padding: 10px 0; }
+.battle-versus { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 16px; }
+.battle-fighter { text-align: center; }
+.battle-fighter svg { display: block; margin: 0 auto; }
+.battle-fighter-name { font-size: 0.85rem; font-weight: 600; margin-top: 6px; }
+.battle-fighter-val { font-size: 0.8rem; color: #6C5CE7; }
+.battle-vs { font-size: 1.5rem; font-weight: 900; color: #E17055; }
+.battle-stat-chosen { font-size: 0.85rem; color: #636E72; margin-bottom: 12px; }
+.battle-outcome { font-size: 1.2rem; font-weight: 800; padding: 12px; border-radius: 12px; }
+.battle-outcome.win { color: #00B894; background: #F0FFF4; }
+.battle-outcome.lose { color: #E17055; background: #FFF3E0; }
+
+/* === 아이템 교환 === */
+.exchange-form select { width: 100%; padding: 10px; border: 2px solid #DFE6E9; border-radius: 8px; font-size: 0.9rem; margin-top: 4px; }
+
+/* === 학부모 뷰 === */
+.parent-view { }
+.parent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.parent-student-list { display: flex; flex-direction: column; gap: 6px; }
+.parent-student-card {
+  display: flex; align-items: center; gap: 10px; padding: 12px;
+  background: #F8F9FA; border-radius: 12px; cursor: pointer; transition: background 0.2s;
+}
+.parent-student-card:hover { background: #F8F5FF; }
+.parent-student-tama { flex-shrink: 0; }
+.parent-student-tama svg { display: block; }
+.parent-student-info { flex: 1; }
+.parent-student-info strong { display: block; font-size: 0.95rem; }
+.parent-student-info span { font-size: 0.78rem; color: #636E72; }
+.parent-mood { font-size: 1.3rem; }
+
+/* === 다크 모드 === */
+body.dark-mode { --bg: #1a1a2e; --text: #E8E8E8; --text-muted: #9E9E9E; --primary: #A29BFE; --primary-light: #6C5CE7; --secondary: #81ECEC; --border: #2D2D44; --card-bg: #232340; background: #1a1a2e; color: #E8E8E8; }
+body.dark-mode .app-header { background: #232340; border-color: #2D2D44; }
+body.dark-mode .tab-bar { background: #232340; border-color: #2D2D44; }
+body.dark-mode .tab-btn { color: #9E9E9E; }
+body.dark-mode .tab-btn.active { color: #A29BFE; }
+body.dark-mode .modal { background: #232340; color: #E8E8E8; }
+body.dark-mode .modal-header { border-color: #2D2D44; }
+body.dark-mode .stat-chip, body.dark-mode .home-footer { background: #2D2D44; }
+body.dark-mode .care-btn { background: #2D2D44; color: #E8E8E8; border-color: #3D3D5C; }
+body.dark-mode .care-btn.done { background: #1a3a2a; }
+body.dark-mode .mission-card { background: #232340; border-color: #2D2D44; }
+body.dark-mode .toast { background: #232340; color: #E8E8E8; }
+body.dark-mode input, body.dark-mode select { background: #2D2D44; color: #E8E8E8; border-color: #3D3D5C; }
+body.dark-mode .btn-secondary { background: #2D2D44; color: #E8E8E8; }
+body.dark-mode .admin-section { color: #E8E8E8; }
+body.dark-mode .admin-tab { background: #2D2D44; color: #9E9E9E; }
+body.dark-mode .admin-tab.active { background: #6C5CE7; color: white; }
+body.dark-mode .quest-step, body.dark-mode .battle-opponent, body.dark-mode .timer-preset-btn,
+body.dark-mode .parent-student-card, body.dark-mode .timer-admin-row { background: #2D2D44; }
+body.dark-mode .quest-step.active { background: #2a2a4e; border-color: #6C5CE7; }
+body.dark-mode .quest-chain { border-color: #3D3D5C; }

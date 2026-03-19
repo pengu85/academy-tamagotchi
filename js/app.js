@@ -10,6 +10,7 @@ const App = {
   init() {
     Storage.initAll();
     Sound.isEnabled();
+    DarkMode.init();
     this._registerSW();
     this._listenInstall();
     this._checkFirstRun();
@@ -182,7 +183,9 @@ const App = {
         <h1>🏫 학원 다마고치</h1>
         <div class="header-actions">
           <button class="btn btn-small btn-ghost" id="sound-toggle">${Sound.isEnabled() ? '🔊' : '🔇'}</button>
+          <button class="btn btn-small btn-ghost" id="dark-toggle">${DarkMode.isEnabled() ? '\u{1F31C}' : '\u{1F31E}'}</button>
           <button class="btn btn-small btn-ghost" id="switch-student-btn">👤 ${UI.esc(student.name)}</button>
+          <button class="btn btn-small btn-ghost" id="parent-btn">\u{1F468}\u200D\u{1F469}\u200D\u{1F467}</button>
           <button class="btn btn-small btn-ghost" id="admin-btn">🔑</button>
         </div>
       </header>
@@ -195,6 +198,7 @@ const App = {
         <button class="tab-btn" data-tab="minigame">🧮<span>게임</span></button>
         <button class="tab-btn" data-tab="challenge">🏆<span>챌린지</span></button>
         <button class="tab-btn" data-tab="friend">👫<span>친구</span></button>
+        <button class="tab-btn" data-tab="timer">\u{1F3AF}<span>\uC9D1\uC911</span></button>
         <button class="tab-btn" data-tab="house">🏠<span>하우스</span></button>
       </nav>
     `;
@@ -207,6 +211,15 @@ const App = {
       const enabled = Sound.toggle();
       document.getElementById("sound-toggle").textContent = enabled ? '🔊' : '🔇';
       if (enabled) Sound.click();
+    });
+
+    document.getElementById("dark-toggle").addEventListener("click", () => {
+      const enabled = DarkMode.toggle();
+      document.getElementById("dark-toggle").textContent = enabled ? '\u{1F31C}' : '\u{1F31E}';
+    });
+
+    document.getElementById("parent-btn").addEventListener("click", () => {
+      ParentView.renderLogin(document.getElementById("tab-content"));
     });
 
     document.getElementById("switch-student-btn").addEventListener("click", () => {
@@ -222,12 +235,21 @@ const App = {
   },
 
   switchTab(tab) {
+    // 미니게임 진행 중 탭 전환 경고
+    if (this.currentTab === "minigame" && Minigame.currentGame && tab !== "minigame") {
+      if (!confirm("게임 진행 중이에요! 나가면 게임이 취소돼요. 나갈까요?")) return;
+      Minigame.currentGame = null;
+    }
+
     this.currentTab = tab;
     const content = document.getElementById("tab-content");
     if (!content) return;
 
+    // 탭 바에 없는 탭(shop,contest,badges,admin)은 홈을 active 유지
+    const tabBarTabs = ["home", "mission", "minigame", "challenge", "friend", "timer", "house"];
+    const activeTab = tabBarTabs.includes(tab) ? tab : "home";
     document.querySelectorAll(".tab-btn").forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.tab === tab);
+      btn.classList.toggle("active", btn.dataset.tab === activeTab);
     });
 
     switch (tab) {
@@ -236,6 +258,8 @@ const App = {
       case "minigame": Minigame.render(content); break;
       case "challenge": Challenge.render(content); break;
       case "friend": Friend.render(content); break;
+      case "timer": Timer.render(content); break;
+      case "battle": Battle.render(content); break;
       case "house": House.render(content); break;
       case "shop": Shop.render(content); break;
       case "contest": Contest.render(content); break;
@@ -340,6 +364,9 @@ const App = {
           <button class="btn btn-secondary btn-small" id="ranking-btn">📊 랭킹</button>
           <button class="btn btn-secondary btn-small" id="shop-btn">🛒 상점</button>
           <button class="btn btn-secondary btn-small" id="contest-btn">🏆 경연</button>
+          <button class="btn btn-secondary btn-small" id="quest-btn">\u{1F5FA}\uFE0F 퀘스트</button>
+          <button class="btn btn-secondary btn-small" id="battle-btn">\u2694\uFE0F 배틀</button>
+          <button class="btn btn-secondary btn-small" id="exchange-btn">\u{1F381} 교환</button>
           <button class="btn btn-secondary btn-small" id="report-btn">📊 리포트</button>
           <button class="btn btn-small share-btn" id="share-btn">📤 공유</button>
         </div>
@@ -434,6 +461,18 @@ const App = {
       this.switchTab("badges");
     });
 
+    document.getElementById("quest-btn").addEventListener("click", () => {
+      Quest.show(student);
+    });
+
+    document.getElementById("battle-btn").addEventListener("click", () => {
+      Battle.render(document.getElementById("tab-content"));
+    });
+
+    document.getElementById("exchange-btn").addEventListener("click", () => {
+      Exchange.showExchangeModal(student);
+    });
+
     document.getElementById("calendar-btn").addEventListener("click", () => {
       Calendar.show(student);
     });
@@ -452,6 +491,12 @@ const App = {
 
     // 스트릭 위기 배너 이벤트
     StreakGuard.bindEvents();
+
+    // 퀘스트 자동 진행 체크
+    const questCompleted = Quest.checkAndAdvance(student);
+    if (questCompleted.length > 0) {
+      setTimeout(() => Quest.showNotification(questCompleted), 500);
+    }
 
     // 뱃지 자동 체크
     const newBadges = Badge.checkNewBadges(student);

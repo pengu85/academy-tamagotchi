@@ -26,6 +26,7 @@ const Admin = {
         <button class="admin-tab" data-admin-tab="dashboard">대시보드</button>
         <button class="admin-tab" data-admin-tab="friends">친구관리</button>
         <button class="admin-tab" data-admin-tab="attendance">출결통계</button>
+        <button class="admin-tab" data-admin-tab="timer">집중통계</button>
         <button class="admin-tab" data-admin-tab="classpet">반펫</button>
         <button class="admin-tab" data-admin-tab="mood">감정현황</button>
         <button class="admin-tab" data-admin-tab="report">리포트</button>
@@ -57,6 +58,7 @@ const Admin = {
           case "dashboard": Dashboard.renderAdmin(content); break;
           case "friends": Friend.renderAdmin(content); break;
           case "attendance": Attendance.renderAdmin(content); break;
+          case "timer": Timer.renderAdmin(content); break;
           case "classpet": ClassPet.renderAdmin(content); break;
           case "mood": Mood.renderAdmin(content); break;
           case "report": Report.renderAdmin(content); break;
@@ -449,6 +451,15 @@ const Admin = {
           </div>
         </div>
 
+        <h3 style="margin-top:20px">\u{1F468}\u200D\u{1F469}\u200D\u{1F467} \uD559\uBD80\uBAA8 PIN</h3>
+        <div class="form-group">
+          <div class="input-row">
+            <input type="password" id="parent-pin-input" maxlength="4" placeholder="\uD559\uBD80\uBAA8 PIN 4\uC790\uB9AC" class="pin-input" value="${ParentView.getPin() || ''}">
+            <button class="btn btn-primary btn-small" id="save-parent-pin">\uC800\uC7A5</button>
+          </div>
+          <p class="text-muted" style="margin-top:4px;font-size:0.75rem">\uD559\uBD80\uBAA8\uAC00 \uC790\uB140 \uB9AC\uD3EC\uD2B8\uB97C \uC5F4\uB78C\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 PIN\uC785\uB2C8\uB2E4.</p>
+        </div>
+
         <h3 style="margin-top:20px">💾 데이터 백업 / 복원</h3>
         <div class="backup-section">
           <div class="backup-info">
@@ -494,6 +505,20 @@ const Admin = {
         UI.showToast("PIN이 변경되었어요!", "success");
       } else {
         UI.showToast("PIN은 숫자 4자리여야 해요", "error");
+      }
+    });
+
+    // 학부모 PIN 저장
+    document.getElementById("save-parent-pin")?.addEventListener("click", () => {
+      const pin = document.getElementById("parent-pin-input").value;
+      if (/^\d{4}$/.test(pin)) {
+        ParentView.setPin(pin);
+        UI.showToast("\uD559\uBD80\uBAA8 PIN\uC774 \uC124\uC815\uB418\uC5C8\uC5B4\uC694!", "success");
+      } else if (pin === "") {
+        Storage.remove("parent_pin");
+        UI.showToast("\uD559\uBD80\uBAA8 PIN\uC774 \uC81C\uAC70\uB418\uC5C8\uC5B4\uC694", "info");
+      } else {
+        UI.showToast("\uC22B\uC790 4\uC790\uB9AC\uB85C \uC785\uB825\uD574\uC8FC\uC138\uC694", "error");
       }
     });
 
@@ -588,6 +613,16 @@ const Admin = {
       validKeys.forEach((key) => {
         localStorage.setItem(key, JSON.stringify(data[key]));
       });
+
+      // 스키마 마이그레이션: 구버전 학생 데이터에 신규 필드 보장
+      const restoredStudents = Storage.getStudents();
+      restoredStudents.forEach((s) => {
+        if (!s.moodHistory) s.moodHistory = [];
+        if (!s.totalSnackBoxEarned) s.totalSnackBoxEarned = 0;
+        if (!s.house) s.house = { wallpaper: "default", floor: "default", furniture: [], ownedDecor: [] };
+        Care.ensure(s);
+      });
+      Storage.saveStudents(restoredStudents);
 
       UI.showToast(`복원 완료! (${studentCount}명, ${validKeys.length}개 항목)`, "success");
       setTimeout(() => location.reload(), 1500);

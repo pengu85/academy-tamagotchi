@@ -450,6 +450,61 @@ function generateMathQuestion(difficulty) {
 }
 
 // ============================================
+// 사자성어 퀴즈 데이터
+// ============================================
+
+const KOREAN_QUESTIONS = [
+  { q: "일석___", hint: "한 돌로 새 두 마리", a: "이조", display: "일석(??)조" },
+  { q: "삼___지교", hint: "맹자 어머니의 교육열", a: "천", display: "삼(??)지교" },
+  { q: "사필___", hint: "반드시 바른 데로 돌아옴", a: "귀정", display: "사필(??)" },
+  { q: "자업자___", hint: "자기가 저지른 일의 결과", a: "득", display: "자업자(??)" },
+  { q: "유비무___", hint: "준비하면 걱정 없다", a: "환", display: "유비무(??)" },
+  { q: "___고지신", hint: "옛것을 통해 새것을 안다", a: "온", display: "(??)고지신" },
+  { q: "백문불여___", hint: "백 번 듣는 것보다 한 번 보기", a: "일견", display: "백문불여(??)" },
+  { q: "___수분관", hint: "물이 가득 차면 넘친다", a: "만", display: "(??)수분관" },
+  { q: "대기___성", hint: "큰 그릇은 늦게 완성된다", a: "만", display: "대기(??)성" },
+  { q: "전화위___", hint: "재앙이 바뀌어 복이 됨", a: "복", display: "전화위(??)" },
+  { q: "이심전___", hint: "마음에서 마음으로 전달", a: "심", display: "이심전(??)" },
+  { q: "___사성어", hint: "네 글자로 된 말", a: "사", display: "(??)자성어" },
+  { q: "좌우___", hint: "이것저것 살펴봄", a: "명", display: "좌우(??)간" },
+  { q: "___탁동시", hint: "닭이 먼저? 알이 먼저?", a: "계", display: "(??)란동시" },
+  { q: "일취___장", hint: "하루가 다르게 발전함", a: "월", display: "일취(??)장" },
+];
+
+function generateKoreanQuestion() {
+  const q = KOREAN_QUESTIONS[Math.floor(Math.random() * KOREAN_QUESTIONS.length)];
+  return { text: `${q.display}\n(${q.hint})`, answer: q.a, op: "korean", isText: true };
+}
+
+// ============================================
+// 영단어 퀴즈 데이터
+// ============================================
+
+const ENGLISH_QUESTIONS = [
+  { word: "apple", meaning: "사과", options: ["사과", "바나나", "포도", "딸기"] },
+  { word: "book", meaning: "책", options: ["책", "공책", "연필", "가방"] },
+  { word: "happy", meaning: "행복한", options: ["행복한", "슬픈", "화난", "피곤한"] },
+  { word: "school", meaning: "학교", options: ["학교", "병원", "공원", "집"] },
+  { word: "friend", meaning: "친구", options: ["친구", "선생님", "부모님", "형제"] },
+  { word: "water", meaning: "물", options: ["물", "불", "흙", "바람"] },
+  { word: "beautiful", meaning: "아름다운", options: ["아름다운", "못생긴", "작은", "큰"] },
+  { word: "together", meaning: "함께", options: ["함께", "혼자", "항상", "가끔"] },
+  { word: "mountain", meaning: "산", options: ["산", "바다", "강", "호수"] },
+  { word: "important", meaning: "중요한", options: ["중요한", "쉬운", "어려운", "재미있는"] },
+  { word: "remember", meaning: "기억하다", options: ["기억하다", "잊다", "생각하다", "꿈꾸다"] },
+  { word: "different", meaning: "다른", options: ["다른", "같은", "비슷한", "특별한"] },
+  { word: "science", meaning: "과학", options: ["과학", "수학", "영어", "음악"] },
+  { word: "practice", meaning: "연습", options: ["연습", "시험", "숙제", "수업"] },
+  { word: "success", meaning: "성공", options: ["성공", "실패", "노력", "결과"] },
+];
+
+function generateEnglishQuestion() {
+  const q = ENGLISH_QUESTIONS[Math.floor(Math.random() * ENGLISH_QUESTIONS.length)];
+  const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+  return { text: `"${q.word}"\uC758 \uB73B\uC740?`, answer: q.meaning, op: "english", isChoice: true, choices: shuffled };
+}
+
+// ============================================
 // 감정/상태 시스템 데이터
 // ============================================
 
