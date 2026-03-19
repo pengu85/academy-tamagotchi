@@ -157,6 +157,8 @@ function createDefaultStudent(name, tamagotchiName) {
     // 랜덤 이벤트
     lastRouletteStreak: 0,
     totalBonusFound: 0,
+    // 감정 체크인 기록
+    moodHistory: [],
     // 일기
     diary: [],
     // 챌린지

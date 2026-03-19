@@ -26,6 +26,8 @@ const Admin = {
         <button class="admin-tab" data-admin-tab="dashboard">대시보드</button>
         <button class="admin-tab" data-admin-tab="friends">친구관리</button>
         <button class="admin-tab" data-admin-tab="attendance">출결통계</button>
+        <button class="admin-tab" data-admin-tab="mood">감정현황</button>
+        <button class="admin-tab" data-admin-tab="report">리포트</button>
         <button class="admin-tab" data-admin-tab="settings">설정</button>
       </div>
       <div class="admin-content" id="admin-content"></div>
@@ -53,6 +55,8 @@ const Admin = {
           case "dashboard": Dashboard.renderAdmin(content); break;
           case "friends": Friend.renderAdmin(content); break;
           case "attendance": Attendance.renderAdmin(content); break;
+          case "mood": Mood.renderAdmin(content); break;
+          case "report": Report.renderAdmin(content); break;
           case "settings": this._renderSettings(content); break;
         }
       });

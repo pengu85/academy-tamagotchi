@@ -1,0 +1,173 @@
+/* ============================================
+   report.css - 성장 리포트 스타일
+   ============================================ */
+
+.report-modal { padding: 0 4px; }
+
+.report-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #F1F2F6;
+  margin-bottom: 16px;
+}
+.report-tama { flex-shrink: 0; }
+.report-hero-info { text-align: left; flex: 1; }
+.report-tama-name { font-size: 1.2rem; font-weight: 700; color: #2D3436; }
+.report-level { font-size: 0.9rem; color: #6C5CE7; font-weight: 600; margin-top: 2px; }
+
+.report-exp-mini { margin-top: 6px; display: flex; align-items: center; gap: 8px; }
+.report-exp-bar {
+  flex: 1;
+  height: 8px;
+  background: #F1F2F6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.report-exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6C5CE7, #A29BFE);
+  border-radius: 4px;
+}
+.report-exp-text { font-size: 0.7rem; color: #636E72; white-space: nowrap; }
+
+.report-section { margin-bottom: 20px; }
+.report-section h4 { font-size: 0.95rem; margin: 0 0 10px; color: #2D3436; }
+
+.report-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.report-stat-card {
+  background: #F8F5FF;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.report-stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #6C5CE7;
+}
+.report-stat-unit { font-size: 0.9rem; font-weight: 500; }
+.report-stat-label { font-size: 0.8rem; color: #636E72; margin-top: 2px; }
+.report-stat-diff {
+  font-size: 0.75rem;
+  margin-top: 4px;
+  font-weight: 600;
+}
+.report-stat-diff.positive { color: #00B894; }
+.report-stat-diff.negative { color: #D63031; }
+.report-stat-diff.neutral { color: #636E72; }
+
+.report-type-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.report-type-chip {
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  background: #F1F2F6;
+  border-radius: 12px;
+  color: #636E72;
+}
+
+.report-mood-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #FFF9DB;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+}
+.report-mood-emoji { font-size: 1.3rem; }
+
+.report-stats-bars { display: flex; flex-direction: column; gap: 8px; }
+.report-stat-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.report-stat-bar-label {
+  font-size: 0.8rem;
+  width: 65px;
+  color: #636E72;
+  white-space: nowrap;
+}
+.report-stat-bar-track {
+  flex: 1;
+  height: 12px;
+  background: #F1F2F6;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.report-stat-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+.report-stat-bar-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2D3436;
+  width: 25px;
+  text-align: right;
+}
+
+.report-badge-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.report-badge-bar-wrap {
+  flex: 1;
+  height: 14px;
+  background: #F1F2F6;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.report-badge-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #6C5CE7, #A29BFE);
+  border-radius: 7px;
+  transition: width 0.5s ease;
+}
+.report-badge-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #6C5CE7;
+  white-space: nowrap;
+}
+
+.report-actions {
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* Admin report styles */
+.report-bulk-actions { margin-bottom: 16px; }
+
+.report-student-list { display: flex; flex-direction: column; gap: 4px; }
+.report-student-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #F8F9FA;
+  border-radius: 10px;
+}
+.report-student-info { display: flex; flex-direction: column; gap: 2px; }
+.report-student-info .text-muted { font-size: 0.78rem; }
+.report-student-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mood-badge-small { font-size: 1.1rem; }

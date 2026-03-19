@@ -89,9 +89,9 @@ const App = {
       Storage.updateStudent(student);
       // 튜토리얼 체크
       if (Tutorial.shouldShow()) {
-        Tutorial.show(() => this._startApp());
+        Tutorial.show(() => this._startAppWithMood());
       } else {
-        this._startApp();
+        this._startAppWithMood();
       }
     }
   },
@@ -156,6 +156,21 @@ const App = {
       UI.showToast(`${tamaName}이(가) 태어났어요! 🐣`, "success");
       this._startApp();
     });
+  },
+
+  _startAppWithMood() {
+    const student = Storage.getCurrentStudent();
+    if (!student) return this._showWelcome();
+
+    // 감정 체크인: 오늘 아직 안 했으면 팝업 표시
+    if (!Mood.isCheckedToday(student)) {
+      this._startApp();
+      setTimeout(() => {
+        Mood.showCheckIn(student, () => this.renderHome());
+      }, 500);
+    } else {
+      this._startApp();
+    }
   },
 
   _startApp() {
@@ -267,6 +282,7 @@ const App = {
             <div class="tama-level">Lv. ${tama.level}</div>
             <div class="evolution-stage-label">${evoLabel} 단계</div>
             <div class="mood-label">${moodInfo.icon} ${moodInfo.name}</div>
+            ${Mood.getTodayMood(student) ? `<div class="mood-today-badge" id="mood-badge">${Mood.getTodayMood(student).emoji} 오늘의 기분: ${Mood.getTodayMood(student).label}</div>` : ''}
           </div>
         </div>
 
@@ -304,6 +320,7 @@ const App = {
           <button class="btn btn-secondary btn-small" id="ranking-btn">📊 랭킹</button>
           <button class="btn btn-secondary btn-small" id="shop-btn">🛒 상점</button>
           <button class="btn btn-secondary btn-small" id="contest-btn">🏆 경연</button>
+          <button class="btn btn-secondary btn-small" id="report-btn">📊 리포트</button>
           <button class="btn btn-small share-btn" id="share-btn">📤 공유</button>
         </div>
         <div class="season-indicator" style="background: ${getCurrentSeason().bgColor}; color: ${getCurrentSeason().accent}">
@@ -381,6 +398,10 @@ const App = {
 
     document.getElementById("ranking-btn").addEventListener("click", () => {
       Ranking.showRankingModal();
+    });
+
+    document.getElementById("report-btn").addEventListener("click", () => {
+      Report.showMyReport(student);
     });
 
     document.getElementById("share-btn").addEventListener("click", () => {

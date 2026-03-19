@@ -173,11 +173,15 @@ const Dashboard = {
     ctx.font = "14px Pretendard, sans-serif";
     ctx.fillStyle = "#636E72";
 
+    // 감정 체크인 요약
+    const todayMoodData = Mood.getTodayMood(student);
+    const moodLabel = todayMoodData ? `${todayMoodData.emoji} ${todayMoodData.label}` : `${moodInfo.icon} ${moodInfo.name}`;
+
     const rows = [
       [`📋 완료한 미션`, `${weekMissions.length}개`],
       [`🔥 연속 출석`, `${student.streakDays}일`],
       [`🧮 미니게임 만점`, `${student.perfectMinigames || 0}회`],
-      [`${moodInfo.icon} 현재 기분`, moodInfo.name],
+      [`💭 오늘의 기분`, moodLabel],
       [`🏅 획득한 업적`, `${(student.badges || []).length}/${BADGES.length}개`],
     ];
 

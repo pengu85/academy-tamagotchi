@@ -1,0 +1,204 @@
+/* ============================================
+   mood.css - 감정 체크인 스타일
+   ============================================ */
+
+.mood-checkin-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  padding: 20px;
+}
+.mood-checkin-overlay.active { opacity: 1; }
+
+.mood-checkin-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 24px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  animation: moodSlideUp 0.4s ease;
+}
+
+@keyframes moodSlideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.mood-checkin-header { margin-bottom: 20px; }
+.mood-checkin-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+.mood-checkin-header h2 { font-size: 1.3rem; color: #2D3436; margin: 0 0 4px; }
+.mood-checkin-sub { color: #636E72; font-size: 0.85rem; margin: 0; }
+
+.mood-checkin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mood-checkin-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border: 2px solid #eee;
+  border-radius: 14px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mood-checkin-btn:hover,
+.mood-checkin-btn:active {
+  border-color: var(--mood-color);
+  background: #F8F5FF;
+  transform: scale(1.05);
+}
+.mood-checkin-emoji { font-size: 2rem; }
+.mood-checkin-label { font-size: 0.85rem; font-weight: 600; color: #2D3436; }
+
+/* Result */
+.mood-checkin-result {
+  padding: 20px 0;
+  animation: moodPop 0.4s ease;
+}
+
+@keyframes moodPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.mood-result-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+.mood-result-message { font-size: 1.1rem; font-weight: 600; color: #2D3436; margin-bottom: 12px; line-height: 1.5; }
+.mood-result-exp { font-size: 0.95rem; color: #6C5CE7; font-weight: 700; }
+
+/* Home mood badge */
+.mood-today-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #F8F5FF;
+  font-size: 0.85rem;
+  color: #6C5CE7;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.mood-today-badge:hover { background: #EDE7FF; }
+
+/* ============================================
+   Admin mood styles
+   ============================================ */
+
+.mood-admin-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.mood-summary-stat {
+  background: #F8F5FF;
+  border-radius: 12px;
+  padding: 12px 20px;
+  text-align: center;
+  flex: 1;
+}
+.mood-summary-value { font-size: 1.5rem; font-weight: 700; color: #6C5CE7; }
+.mood-summary-label { font-size: 0.8rem; color: #636E72; margin-top: 2px; }
+
+.mood-today-dist { margin-bottom: 20px; }
+.mood-dist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.mood-dist-emoji { font-size: 1.2rem; width: 28px; text-align: center; }
+.mood-dist-label { font-size: 0.85rem; width: 55px; color: #2D3436; }
+.mood-dist-bar-wrap {
+  flex: 1;
+  height: 16px;
+  background: #F1F2F6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.mood-dist-bar {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.5s ease;
+  min-width: 0;
+}
+.mood-dist-count {
+  font-size: 0.8rem;
+  color: #636E72;
+  width: 35px;
+  text-align: right;
+}
+
+.mood-alert-section {
+  background: #FFF9DB;
+  border: 1px solid #FFEAA7;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+.mood-alert-section h4 { margin: 0 0 4px; font-size: 0.95rem; }
+.mood-alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #FFEAA7;
+  font-size: 0.85rem;
+}
+.mood-alert-item:last-child { border-bottom: none; }
+
+.mood-history-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+.mood-history-list { margin-top: 4px; }
+.mood-history-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #F1F2F6;
+}
+.mood-history-name {
+  width: 60px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+.mood-history-days { display: flex; gap: 4px; }
+.mood-day-cell {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #F8F9FA;
+  border-radius: 6px;
+  color: #B2BEC3;
+}
+.mood-day-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #636E72;
+  background: transparent;
+}
