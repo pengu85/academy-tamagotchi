@@ -1,0 +1,112 @@
+/* ============================================
+   emotion.css - 감정 표현 강화 스타일
+   ============================================ */
+
+/* 환영 배너 */
+.emotion-welcome {
+  background: linear-gradient(135deg, #F8F5FF, #E8F5E9);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  animation: emotionSlideDown 0.5s ease;
+  margin-bottom: -8px;
+}
+
+@keyframes emotionSlideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.emotion-welcome-emojis { font-size: 1.3rem; }
+.emotion-welcome-speech {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2D3436;
+  line-height: 1.4;
+}
+
+.emotion-welcome.miss {
+  background: linear-gradient(135deg, #FFF9DB, #FFF3E0);
+}
+.emotion-welcome.lonely {
+  background: linear-gradient(135deg, #FFEEF1, #FFF3E0);
+}
+
+/* 방치 오버레이 */
+.tama-display { position: relative; }
+
+.emotion-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 1;
+}
+.emotion-overlay.worried {
+  background: rgba(0,0,0,0.05);
+}
+.emotion-overlay.sad {
+  background: rgba(0,0,0,0.1);
+}
+.emotion-overlay.sick {
+  background: rgba(100,0,0,0.08);
+}
+
+.emotion-bubble {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  color: #636E72;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  animation: emotionBubble 2s ease-in-out infinite;
+}
+
+@keyframes emotionBubble {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+.emotion-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  letter-spacing: 8px;
+  opacity: 0.6;
+  animation: emotionDrip 1.5s ease-in-out infinite;
+}
+
+@keyframes emotionDrip {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%); }
+  50% { opacity: 0.7; transform: translate(-50%, -45%); }
+}
+
+/* 접속 시 캐릭터 점프 */
+.tama-character.tama-welcome {
+  animation: tamaJump 0.6s ease 2;
+}
+
+@keyframes tamaJump {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-20px) scale(1.05); }
+  60% { transform: translateY(-10px); }
+}
+
+.tama-character.tama-lonely {
+  animation: tamaLonely 3s ease-in-out infinite;
+}
+
+@keyframes tamaLonely {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(3px) scale(0.97); }
+}

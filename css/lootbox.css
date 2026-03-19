@@ -1,0 +1,120 @@
+/* ============================================
+   lootbox.css - 보상 카드 뽑기 스타일
+   ============================================ */
+
+.loot-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.loot-overlay.active { opacity: 1; }
+
+.loot-card-wrapper {
+  perspective: 800px;
+}
+
+.loot-card {
+  width: 200px;
+  height: 280px;
+  cursor: pointer;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.loot-card.back {
+  animation: lootFloat 2s ease-in-out infinite;
+}
+
+@keyframes lootFloat {
+  0%, 100% { transform: translateY(0) rotateY(0deg); }
+  25% { transform: translateY(-8px) rotateY(3deg); }
+  75% { transform: translateY(-4px) rotateY(-3deg); }
+}
+
+.loot-card.flipped {
+  animation: lootFlip 0.6s ease forwards;
+}
+
+@keyframes lootFlip {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(90deg) scale(1.1); }
+  100% { transform: rotateY(0deg) scale(1.05); }
+}
+
+.loot-card-back {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 8px 30px rgba(108, 92, 231, 0.4);
+  border: 3px solid #A29BFE;
+}
+
+.loot-card-back-icon {
+  font-size: 3rem;
+  animation: lootPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes lootPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.loot-card-back-text {
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.loot-card-front {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  border: 3px solid;
+  animation: lootGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes lootGlow {
+  from { box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  to { box-shadow: 0 8px 40px rgba(108, 92, 231, 0.4); }
+}
+
+.loot-rarity {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.loot-reward-icon {
+  font-size: 3.5rem;
+}
+
+.loot-reward-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #2D3436;
+  text-align: center;
+}
+
+.loot-reward-desc {
+  font-size: 0.8rem;
+  color: #636E72;
+}

@@ -1,0 +1,68 @@
+/* ============================================
+   classpet.css - 반 펫 스타일
+   ============================================ */
+
+.classpet-widget {
+  width: 100%;
+  background: linear-gradient(135deg, #F8F5FF, #EDE7FF);
+  border: 2px solid #D5C8FF;
+  border-radius: 14px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.classpet-widget:hover { border-color: #A29BFE; }
+.classpet-widget.low { border-color: #FFEAA7; background: linear-gradient(135deg, #FFF9DB, #FFF3E0); }
+
+.cp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.cp-icon { font-size: 1.2rem; }
+.cp-name { font-size: 0.9rem; font-weight: 700; color: #2D3436; }
+
+.cp-gauges { display: flex; flex-direction: column; gap: 4px; }
+.cp-gauge { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; }
+.cp-bar {
+  flex: 1; height: 8px; background: #F1F2F6; border-radius: 4px; overflow: hidden;
+}
+.cp-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+.cp-goal {
+  margin-top: 6px; font-size: 0.78rem; color: #636E72;
+  padding: 4px 8px; background: rgba(255,255,255,0.6); border-radius: 8px;
+}
+.cp-goal.achieved { color: #00B894; font-weight: 600; }
+
+/* Admin */
+.cp-admin-status {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;
+}
+.cp-admin-stat {
+  text-align: center; background: #F8F5FF; border-radius: 10px; padding: 10px 4px;
+}
+.cp-admin-value { font-size: 1rem; font-weight: 700; color: #6C5CE7; }
+.cp-admin-label { font-size: 0.7rem; color: #636E72; margin-top: 2px; }
+
+.cp-goal-admin {
+  display: flex; align-items: center; gap: 8px; padding: 10px; background: #F8F9FA;
+  border-radius: 10px; font-size: 0.85rem; margin-bottom: 8px;
+}
+.cp-goal-bar-wrap {
+  flex: 1; height: 10px; background: #DFE6E9; border-radius: 5px; overflow: hidden;
+}
+.cp-goal-bar {
+  height: 100%; background: linear-gradient(90deg, #6C5CE7, #A29BFE); border-radius: 5px;
+}
+
+.cp-contrib-list { display: flex; flex-direction: column; gap: 4px; }
+.cp-contrib-row {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  background: #F8F9FA; border-radius: 8px; font-size: 0.85rem;
+}
+.cp-contrib-rank { width: 24px; text-align: center; font-weight: 700; }
+.cp-contrib-name { flex: 1; font-weight: 600; }
+.cp-contrib-today { color: #6C5CE7; font-size: 0.78rem; }
+.cp-contrib-total { color: #636E72; font-size: 0.78rem; }

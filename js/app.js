@@ -272,8 +272,11 @@ const App = {
     content.innerHTML = `
       <div class="home-screen">
         ${GameEvent.renderBanner()}
+        ${this._welcomeShown ? '' : (() => { const wr = Emotion.getWelcomeReaction(student); this._welcomeShown = true; return wr ? `<div class="emotion-welcome ${wr.type}"><span class="emotion-welcome-emojis">${wr.emojis[0]}</span><span class="emotion-welcome-speech">${UI.esc(wr.speech)}</span></div>` : ''; })()}
         ${Secret.renderRoulette(student)}
+        ${ClassPet.renderWidget()}
         <div class="tama-display">
+          ${Emotion.getNeglectOverlay(student)}
           <div class="tama-character ${mood === 'sad' || mood === 'hungry' ? 'tama-sad' : ''} ${student.care?.isSick ? 'tama-sick' : ''}" id="tama-character">
             ${TamagotchiRenderer.render(tama, 200, mood)}
           </div>
@@ -552,6 +555,16 @@ const App = {
         if (result.success) {
           Sound.missionComplete();
           UI.showToast(result.message, "success");
+
+          // 반 펫 기여
+          const missions2 = Storage.getMissions() || [];
+          const completedMission = missions2.find((m) => m.id === missionId);
+          ClassPet.contribute(student.id, completedMission?.type === "attendance" ? "attendance" : "mission");
+
+          // 랜덤 보상 카드 (30% 확률)
+          if (Math.random() < 0.3) {
+            setTimeout(() => Lootbox.showDraw(student), 300);
+          }
 
           const levelUps = result.levelUps || [];
           const evolutions = result.evolutions || [];
