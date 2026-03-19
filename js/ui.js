@@ -3,6 +3,12 @@
 // ============================================
 
 const UI = {
+  // HTML 이스케이프 (XSS 방어)
+  esc(str) {
+    if (!str) return "";
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  },
+
   // 다마고치 리액션 표시
   showReaction(reaction) {
     const tamaEl = document.getElementById("tama-character");

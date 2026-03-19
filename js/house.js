@@ -20,7 +20,7 @@ const House = {
     container.innerHTML = `
       <div class="house-screen">
         <div class="house-header">
-          <h2>🏠 ${student.tamagotchi.name}의 방</h2>
+          <h2>🏠 ${UI.esc(student.tamagotchi.name)}의 방</h2>
           <span class="points-display">💰 ${student.tamagotchi.points}p</span>
         </div>
 

@@ -182,7 +182,7 @@ const App = {
         <h1>🏫 학원 다마고치</h1>
         <div class="header-actions">
           <button class="btn btn-small btn-ghost" id="sound-toggle">${Sound.isEnabled() ? '🔊' : '🔇'}</button>
-          <button class="btn btn-small btn-ghost" id="switch-student-btn">👤 ${student.name}</button>
+          <button class="btn btn-small btn-ghost" id="switch-student-btn">👤 ${UI.esc(student.name)}</button>
           <button class="btn btn-small btn-ghost" id="admin-btn">🔑</button>
         </div>
       </header>
@@ -278,7 +278,7 @@ const App = {
             ${TamagotchiRenderer.render(tama, 200, mood)}
           </div>
           <div class="tama-info">
-            <div class="tama-name">${tama.name} ${student.care?.isSick ? '🤒' : ''}</div>
+            <div class="tama-name">${UI.esc(tama.name)} ${student.care?.isSick ? '🤒' : ''}</div>
             <div class="tama-level">Lv. ${tama.level}</div>
             <div class="evolution-stage-label">${evoLabel} 단계</div>
             <div class="mood-label">${moodInfo.icon} ${moodInfo.name}</div>
@@ -317,6 +317,7 @@ const App = {
           <button class="btn btn-secondary btn-small" id="diary-btn">📖 일기</button>
           <button class="btn btn-secondary btn-small" id="dex-btn">🔬 도감</button>
           <button class="btn btn-secondary btn-small" id="badge-btn">🏅 업적</button>
+          <button class="btn btn-secondary btn-small" id="calendar-btn">📅 출석</button>
           <button class="btn btn-secondary btn-small" id="ranking-btn">📊 랭킹</button>
           <button class="btn btn-secondary btn-small" id="shop-btn">🛒 상점</button>
           <button class="btn btn-secondary btn-small" id="contest-btn">🏆 경연</button>
@@ -395,6 +396,10 @@ const App = {
 
     document.getElementById("badge-btn").addEventListener("click", () => {
       this.switchTab("badges");
+    });
+
+    document.getElementById("calendar-btn").addEventListener("click", () => {
+      Calendar.show(student);
     });
 
     document.getElementById("ranking-btn").addEventListener("click", () => {

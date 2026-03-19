@@ -71,7 +71,7 @@ const Report = {
             ${TamagotchiRenderer.render(tama, 120, calculateMood(student))}
           </div>
           <div class="report-hero-info">
-            <div class="report-tama-name">${tama.name}</div>
+            <div class="report-tama-name">${UI.esc(tama.name)}</div>
             <div class="report-level">Lv.${tama.level} \u00B7 ${evoLabel}</div>
             <div class="report-exp-mini">
               <div class="report-exp-bar"><div class="report-exp-fill" style="width:${expPercent}%"></div></div>
@@ -181,7 +181,7 @@ const Report = {
       html += `
         <div class="report-student-row">
           <div class="report-student-info">
-            <strong>${s.name}</strong>
+            <strong>${UI.esc(s.name)}</strong>
             <span class="text-muted">Lv.${s.tamagotchi.level} \u00B7 \uC8FC\uAC04 \uBBF8\uC158 ${weekMissions}\uAC1C \u00B7 \uC5F0\uC18D\uCD9C\uC11D ${s.streakDays}\uC77C</span>
           </div>
           <div class="report-student-actions">

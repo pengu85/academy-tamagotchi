@@ -200,8 +200,8 @@ const Admin = {
       html += `
         <div class="student-item-admin">
           <div class="student-info">
-            <strong>${s.name}</strong>
-            <span>다마고치: ${s.tamagotchi.name} (Lv.${s.tamagotchi.level})</span>
+            <strong>${UI.esc(s.name)}</strong>
+            <span>다마고치: ${UI.esc(s.tamagotchi.name)} (Lv.${s.tamagotchi.level})</span>
             <span>포인트: ${s.tamagotchi.points}p | 간식상자: ${s.snackBoxChances}회</span>
           </div>
           <div class="student-actions">
@@ -397,7 +397,7 @@ const Admin = {
     students.forEach((s) => {
       html += `
         <div class="snackbox-item">
-          <span><strong>${s.name}</strong>: ${s.snackBoxChances}회 남음</span>
+          <span><strong>${UI.esc(s.name)}</strong>: ${s.snackBoxChances}회 남음</span>
           ${s.snackBoxChances > 0
             ? `<button class="btn btn-small btn-primary" data-use-snack="${s.id}">사용 처리</button>`
             : '<span class="text-muted">기회 없음</span>'}

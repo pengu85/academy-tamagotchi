@@ -207,7 +207,7 @@ const Mood = {
       }
       html += `
         <div class="mood-history-row">
-          <span class="mood-history-name">${s.name}</span>
+          <span class="mood-history-name">${UI.esc(s.name)}</span>
           <div class="mood-history-days">${days.map((d) => `<span class="mood-day-cell">${d}</span>`).join("")}</div>
         </div>
       `;

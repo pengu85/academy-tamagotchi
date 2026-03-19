@@ -75,8 +75,8 @@ const Dashboard = {
     stats.forEach((s) => {
       html += `
         <tr class="${s.isSick ? 'row-sick' : ''}">
-          <td><strong>${s.student.name}</strong></td>
-          <td>${s.student.tamagotchi.name}</td>
+          <td><strong>${UI.esc(s.student.name)}</strong></td>
+          <td>${UI.esc(s.student.tamagotchi.name)}</td>
           <td>${s.student.tamagotchi.level}</td>
           <td>${s.attendedToday ? '✅' : '❌'}</td>
           <td>${s.todayMissions}개</td>

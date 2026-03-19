@@ -127,6 +127,6 @@ const Diary = {
     });
 
     html += '</div>';
-    UI.showModal(`📖 ${student.tamagotchi.name}의 일기`, html, [{ text: "닫기", class: "btn btn-secondary" }]);
+    UI.showModal(`📖 ${UI.esc(student.tamagotchi.name)}의 일기`, html, [{ text: "닫기", class: "btn btn-secondary" }]);
   },
 };
